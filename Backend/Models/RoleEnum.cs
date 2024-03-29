@@ -1,6 +1,6 @@
 ﻿namespace Backend.Models
 {
-    public enum Role
+    public enum RoleEnum
     {
         Top = 1,
         Jungle = 2,

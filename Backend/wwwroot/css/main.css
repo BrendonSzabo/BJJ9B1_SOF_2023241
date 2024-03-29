@@ -1,0 +1,110 @@
+﻿.body {
+    width: 1440px;
+    height: 1024px;
+    position: relative;
+    background: linear-gradient(180deg, #34268D 47%, #6343BF 100%)
+}
+
+.profile-image{
+    width: 50px;
+    height: 50px;
+    background: #B6C3FD;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}}
+
+.listbutton-column {
+    flex: 1 1 0;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    display: inline-flex
+}
+
+.listbutton-column-text {
+    flex: 1 1 0;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    display: inline-flex;
+    width: 60%;
+}
+
+.listbutton-text {
+    align-self: stretch;
+    color: rgba(255, 255, 255, 1);
+    font-size: 14px;
+    font-family: Roboto;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: 0.25px;
+    word-wrap: break-word
+}
+
+.listbutton-main {
+    align-self: stretch;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: 16px;
+    padding-right: 20px;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 12px;
+    display: inline-flex;
+    width: 350px;
+    height: 54px;
+    background: black;
+}
+
+.list-aligner {
+    height: 56px;
+    left: 20px;
+    top: 20px;
+    position: absolute;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    display: inline-flex;
+    gap: 20px
+}
+
+.list-border {
+    width: 425px;
+    height: 772px;
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px #B6C3FD dotted;
+}
+.column {
+    float: left;
+    width: 33.33%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.labl {
+    display: block;
+    width: 400px;
+}
+
+    .labl > input { /* HIDE RADIO */
+        visibility: hidden; /* Makes input not-clickable */
+        position: absolute; /* Remove input from document flow */
+    }
+
+        .labl > input + div { /* DIV STYLES */
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .labl > input:checked + div { /* (RADIO CHECKED) DIV STYLES */
+            background-color: #ffd6bb;
+            border: 1px solid #ff6600;
+        }
