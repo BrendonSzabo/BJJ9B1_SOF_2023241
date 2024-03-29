@@ -1,5 +1,5 @@
-﻿using Backend.Models;
-using Backend.Repository;
+﻿using Backend.Data.Repository;
+using Backend.Models;
 
 namespace Backend.Logic
 {

@@ -1,7 +1,7 @@
 ﻿using Backend.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Backend.Repository
+namespace Backend.Data.Repository
 {
     public class LeagueDbContext : DbContext
     {
@@ -12,12 +12,12 @@ namespace Backend.Repository
 
         public LeagueDbContext()
         {
-            this.Database.EnsureCreated();
+            Database.EnsureCreated();
         }
 
         public LeagueDbContext(DbContextOptions<LeagueDbContext> options) : base(options)
         {
-            this.Database.EnsureCreated();
+            Database.EnsureCreated();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder builder)

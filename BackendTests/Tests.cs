@@ -1,7 +1,7 @@
 using AutoFixture;
 using AutoFixture.Xunit2;
+using Backend.Data.Repository;
 using Backend.Models;
-using Backend.Repository;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 

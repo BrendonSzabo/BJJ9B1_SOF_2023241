@@ -1,19 +1,18 @@
 ﻿using Backend.Models;
-using Microsoft.EntityFrameworkCore;
 
-namespace Backend.Repository
+namespace Backend.Data.Repository
 {
-    public class TeamRepository : Repository<Team>, IRepository<Team>
+    public class MatchRepository : Repository<Match>, IRepository<Match>
     {
-        public TeamRepository(LeagueDbContext context) : base(context)
+        public MatchRepository(LeagueDbContext context) : base(context)
         {
         }
-        public override Team Read(int id)
+        public override Match Read(int id)
         {
-            return ctx.Teams.FirstOrDefault(t => t.Id == id);
+            return ctx.Matches.FirstOrDefault(t => t.Id == id);
         }
 
-        public override void Update(Team item)
+        public override void Update(Match item)
         {
             var old = Read(item.Id);
             foreach (var prop in old.GetType().GetProperties())

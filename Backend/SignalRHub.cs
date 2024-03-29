@@ -5,13 +5,16 @@ namespace Backend
 {
     public class SignalRHub : Hub
     {
-        public async Task LoadPlayers(Player[] players)
+        public override Task OnConnectedAsync()
         {
-            await Clients.All.SendAsync("LoadPlayers", players);
+            Clients.Caller.SendAsync("Connected", Context.ConnectionId);
+            return base.OnConnectedAsync();
         }
-        public async Task AddPlayer(Player player)
+
+        public override Task OnDisconnectedAsync(Exception exception)
         {
-            await Clients.All.SendAsync("AddPlayer", player);
+            Clients.Caller.SendAsync("Disconnected", Context.ConnectionId);
+            return base.OnDisconnectedAsync(exception);
         }
     }
 }

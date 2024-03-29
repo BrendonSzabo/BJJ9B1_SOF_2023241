@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace Backend.Repository
+namespace Backend.Data.Repository
 {
     public abstract class Repository<T> : IRepository<T> where T : class
     {
