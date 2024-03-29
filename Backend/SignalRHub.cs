@@ -9,7 +9,7 @@ namespace Backend
         {
             await Clients.All.SendAsync("LoadPlayers", players);
         }
-        public async Task (Player player)
+        public async Task AddPlayer(Player player)
         {
             await Clients.All.SendAsync("AddPlayer", player);
         }

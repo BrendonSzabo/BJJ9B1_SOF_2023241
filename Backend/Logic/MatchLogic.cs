@@ -1,30 +1,37 @@
 ﻿using Backend.Models;
+using Backend.Repository;
 
 namespace Backend.Logic
 {
     public class MatchLogic : IMatch
     {
-        IRepository
-        public IQueryable<Match> ReadAllPlayers => throw new NotImplementedException();
+        IRepository<Match> repository;
 
-        public void CreatePlayer(Match player)
+        public MatchLogic(IRepository<Match> repository)
         {
-            throw new NotImplementedException();
+            this.repository = repository;
         }
 
-        public void DeletePlayer(int id)
+        public IQueryable<Match> ReadAll => repository.ReadAll();
+
+        public void Create(Match item)
         {
-            throw new NotImplementedException();
+            repository.Create(item);
         }
 
-        public Match ReadPlayerById(int id)
+        public void Delete(int id)
         {
-            throw new NotImplementedException();
+            repository.Delete(id);
         }
 
-        public void UpdatePlayer(Match player)
+        public Match ReadById(int id)
         {
-            throw new NotImplementedException();
+            return repository.Read(id);
+        }
+
+        public void Update(Match item)
+        {
+            repository.Update(item);
         }
     }
 }

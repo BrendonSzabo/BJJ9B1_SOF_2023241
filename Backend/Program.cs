@@ -1,7 +1,9 @@
 using Backend;
 using Backend.Data;
+using Backend.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Text.RegularExpressions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -51,3 +53,8 @@ app.MapControllerRoute(
 app.MapRazorPages();
 
 app.Run();
+
+Backend.Models.Match match = new Backend.Models.Match();
+Team team = new Team();
+User user = new User();
+Player player = new Player();

@@ -10,7 +10,7 @@ namespace Backend.Repository
         }
         public override User Read(int id)
         {
-            return ctx.Matches.FirstOrDefault(t => t.Id == id);
+            return ctx.Users.FirstOrDefault(t => t.Id == id);
         }
 
         public override void Update(User item)

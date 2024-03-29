@@ -10,7 +10,7 @@ namespace Backend.Repository
         }
         public override Team Read(int id)
         {
-            return ctx.Matches.FirstOrDefault(t => t.Id == id);
+            return ctx.Teams.FirstOrDefault(t => t.Id == id);
         }
 
         public override void Update(Team item)

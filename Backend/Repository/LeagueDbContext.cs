@@ -14,6 +14,12 @@ namespace Backend.Repository
         {
             this.Database.EnsureCreated();
         }
+
+        public LeagueDbContext(DbContextOptions<LeagueDbContext> options) : base(options)
+        {
+            this.Database.EnsureCreated();
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
             if (!builder.IsConfigured)

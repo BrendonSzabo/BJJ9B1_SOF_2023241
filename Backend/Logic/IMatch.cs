@@ -4,11 +4,11 @@ namespace Backend.Logic
 {
     public interface IMatch
     {
-        IQueryable<Match> ReadAllPlayers { get; }
-        Match ReadPlayerById(int id);
-        void CreatePlayer(Match player);
-        void UpdatePlayer(Match player);
-        void DeletePlayer(int id);
+        IQueryable<Match> ReadAll { get; }
+        Match ReadById(int id);
+        void Create(Match player);
+        void Update(Match player);
+        void Delete(int id);
 
     }
 }

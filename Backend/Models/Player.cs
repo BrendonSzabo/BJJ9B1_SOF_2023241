@@ -13,7 +13,7 @@ namespace Backend.Models
         public string Name { get; set; }
         public int Rating { get; set; }
         public RoleEnum Role { get; set; }
-        public string[] Language { get; set; }
+        public string Language { get; set; }
         public string Nationality { get; set; }
         public int Experience { get; set; }
         public int Age { get; set; }

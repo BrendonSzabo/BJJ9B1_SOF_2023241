@@ -10,7 +10,7 @@ namespace Backend.Repository
         }
         public override Player Read(int id)
         {
-            return ctx.Matches.FirstOrDefault(t => t.Id == id);
+            return ctx.Players.FirstOrDefault(t => t.Id == id);
         }
 
         public override void Update(Player item)
