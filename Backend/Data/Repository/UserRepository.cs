@@ -5,12 +5,17 @@ namespace Backend.Data.Repository
 {
     public class UserRepository : Repository<User>, IRepository<User>
     {
-        public UserRepository(LeagueDbContext context) : base(context)
+        public UserRepository(ApplicationDbContext context) : base(context)
         {
         }
+        public override User Read(string id)
+        {
+            return ctx.Users.FirstOrDefault(x => x.Id == id);
+        }
+
         public override User Read(int id)
         {
-            return ctx.Users.FirstOrDefault(t => t.Id == id);
+            throw new NotImplementedException();
         }
 
         public override void Update(User item)

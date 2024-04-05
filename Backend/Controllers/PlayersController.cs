@@ -7,23 +7,30 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Backend.Models;
 using Backend.Data.Repository;
+using Microsoft.AspNetCore.Identity;
+using Backend.Data;
 
 namespace Backend.Controllers
 {
     public class PlayersController : Controller
     {
-        private readonly LeagueDbContext _context;
+        private readonly UserManager<User> _userManager;
+        private readonly ApplicationDbContext _context;
 
-        public PlayersController(LeagueDbContext context)
+        public PlayersController(ApplicationDbContext context, UserManager<User> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Players
         public async Task<IActionResult> Index()
         {
-            var leagueDbContext = _context.Players.Include(p => p.Team);
-            return View(await leagueDbContext.ToListAsync());
+            var userId = _userManager.GetUserId(User);
+            var currentUser = await _userManager.FindByIdAsync(userId);
+            var players = await _context.Players.Include(p => p.Team).ToListAsync();
+            var model = new Tuple<List<Player>, User>(players, currentUser);
+            return View(model);
         }
 
         // GET: Players/Details/5

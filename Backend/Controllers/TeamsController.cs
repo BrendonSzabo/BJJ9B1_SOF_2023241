@@ -7,14 +7,15 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Backend.Data.Repository;
 using Backend.Models;
+using Backend.Data;
 
 namespace Backend.Controllers
 {
     public class TeamsController : Controller
     {
-        private readonly LeagueDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public TeamsController(LeagueDbContext context)
+        public TeamsController(ApplicationDbContext context)
         {
             _context = context;
         }

@@ -1,16 +1,19 @@
-﻿@{
+﻿@model Tuple<IEnumerable<Backend.Models.Player>, User>
+
+@{
+    var ownPlayers = new List<Player>();
     ViewData["Title"] = "Home Page";
 }
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="~/css/main.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/css/main.css" asp-append-version="true" />
     <script src="~/js/playerShop.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HTTP Grid</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTTP Grid</title>
 </head>
 <body class="body">
     <div class="row">
@@ -19,7 +22,32 @@
                 <h2>Header</h2>
             </div>
             <div id="playerShopInitializer" class="player-container">
-                <!-- Contacts will be dynamically added here -->
+                @foreach (var player in Model.Item1)
+                {
+                    if (player.TeamId == Model.Item2.TeamId)
+                    {
+                        ownPlayers.Add(player);
+                    }
+                    <div class="button-body">
+                        @* <label class="labl"> *@
+                        <input type="radio" name="shopPlayer" value="@player" checked>
+                        <div class="listbutton-main">
+                            <div class="listbutton-column">
+                                <div class="listbutton-icon">
+                                    <img src="@player.Image" class="profile-image" />
+                                </div>
+                            </div>
+                            <div class="listbutton-column-text">
+                                <div class="listbutton-text">@player.Name</div>
+                                <div class="listbutton-text">@player.Role</div>
+                            </div>
+                            <div class="listbutton-column">
+                                <div class="listbutton-text">@player.Rating</div>
+                            </div>
+                        </div>
+                        @* </label> *@
+                    </div>
+                }
             </div>
         </div>
         <div class="column">
@@ -55,7 +83,28 @@
                 <h2>Header</h2>
             </div>
             <div id="ownTeamInitializer" class="player-container">
-                <!-- Contacts will be dynamically added here -->
+                @foreach (var player in ownPlayers)
+                {
+                    <div class="button-body">
+                        @* <label class="labl"> *@
+                        <input type="radio" name="shopPlayer" value="@player" checked>
+                        <div class="listbutton-main">
+                            <div class="listbutton-column">
+                                <div class="listbutton-icon">
+                                    <img src="@player.Image" class="profile-image" />
+                                </div>
+                            </div>
+                            <div class="listbutton-column-text">
+                                <div class="listbutton-text">@player.Name</div>
+                                <div class="listbutton-text">@player.Role</div>
+                            </div>
+                            <div class="listbutton-column">
+                                <div class="listbutton-text">@player.Rating</div>
+                            </div>
+                        </div>
+                        @* </label> *@
+                    </div>
+                }
             </div>
         </div>
     </div>

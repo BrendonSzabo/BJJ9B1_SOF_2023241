@@ -19,14 +19,25 @@ namespace Backend.Logic
             repository.Create(item);
         }
 
-        public void Delete(int id)
+        public void Delete(string id)
         {
             repository.Delete(id);
         }
 
+        public void Delete(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public User ReadById(string id)
+        {
+            var thing = repository.Read(id);
+            return repository.ReadAll().FirstOrDefault(x => x.Id == id);
+        }
+
         public User ReadById(int id)
         {
-            return repository.Read(id);
+            throw new System.NotImplementedException();
         }
 
         public void Update(User item)

@@ -5,12 +5,17 @@ namespace Backend.Data.Repository
 {
     public class PlayerRepository : Repository<Player>, IRepository<Player>
     {
-        public PlayerRepository(LeagueDbContext context) : base(context)
+        public PlayerRepository(ApplicationDbContext context) : base(context)
         {
         }
         public override Player Read(int id)
         {
             return ctx.Players.FirstOrDefault(t => t.Id == id);
+        }
+
+        public override Player Read(string id)
+        {
+            throw new NotImplementedException();
         }
 
         public override void Update(Player item)

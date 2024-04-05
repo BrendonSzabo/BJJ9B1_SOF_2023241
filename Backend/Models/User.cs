@@ -1,22 +1,29 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
 namespace Backend.Models
 {
-    public class User
+    public class User : IdentityUser
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
         public int Credits { get; set; }
         [ForeignKey("Team")]
-        public int TeamId { get; set; }
+        public int? TeamId { get; set; }
         [NotMapped]
         [JsonIgnore]
         public virtual Team Team { get; set; }
+
         public User()
         {
+            Credits = 0;
+            Team = new Team();
+        }
+
+        public User(string userName) : base(userName)
+        {
+            Credits = 0;
+            Team = new Team();
         }
     }
 }

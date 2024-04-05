@@ -1,44 +1,52 @@
-using AutoFixture;
-using AutoFixture.Xunit2;
-using Backend.Data.Repository;
+﻿using AutoFixture;
+using Backend.Data;
 using Backend.Models;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
+using Xunit;
 
-namespace Backend
+namespace BackendTests
 {
     public class Tests : IDisposable
     {
-        private readonly LeagueDbContext _dbContext;
+        private readonly ApplicationDbContext _dbContext;
         private Fixture _fixture;
         public Tests()
         {
             // Initialize your DbContext with an in-memory database for testing
-            var options = new DbContextOptionsBuilder<LeagueDbContext>()
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(databaseName: "TestDatabase")
                 .Options;
-            _dbContext = new LeagueDbContext(options);
+            _dbContext = new ApplicationDbContext(options);
             _fixture = new Fixture();
             _fixture.Behaviors.OfType<ThrowingRecursionBehavior>().ToList()
                 .ForEach(b => _fixture.Behaviors.Remove(b));
             _fixture.Behaviors.Add(new OmitOnRecursionBehavior());
+            //_fixture.Customize(new AutoFixture.AutoMoq.AutoMoqCustomization());
+
         }
 
         [Fact]
         public void Match_Should_Have_Teams()
         {
             // Arrange
+            var user1 = _fixture.Create<User>();
+            var user2 = _fixture.Create<User>();
             var match = _fixture.Create<Match>();
             match.Teams.Clear();
             var team1 = _fixture.Create<Team>();
             var team2 = _fixture.Create<Team>();
+            user1.Team = team1;
+            user2.Team = team2;
+            team1.User = user1;
+            team2.User = user2;
             match.Teams.Add(team1);
             match.Teams.Add(team2);
             _dbContext.Matches.Add(match);
             _dbContext.SaveChanges();
 
             // Act
-            var savedMatch = _dbContext.Matches.Include(m => m.Teams).FirstOrDefault();
+            var savedMatch = _dbContext.Matches.FirstOrDefault(x => x.Id == match.Id);
 
             // Assert
             savedMatch.Should().NotBeNull();

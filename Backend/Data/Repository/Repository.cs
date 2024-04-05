@@ -4,9 +4,9 @@ namespace Backend.Data.Repository
 {
     public abstract class Repository<T> : IRepository<T> where T : class
     {
-        protected LeagueDbContext ctx;
+        protected ApplicationDbContext ctx;
 
-        public Repository(LeagueDbContext ctx)
+        public Repository(ApplicationDbContext ctx)
         {
             this.ctx = ctx;
         }
@@ -29,5 +29,11 @@ namespace Backend.Data.Repository
 
         public abstract void Update(T item);
         public abstract T Read(int id);
+        public void Delete(string id)
+        {
+            ctx.Set<T>().Remove(Read(id));
+            ctx.SaveChanges();
+        }
+        public abstract T Read(string id);
     }
 }

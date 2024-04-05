@@ -7,5 +7,8 @@
         void Create(T item);
         void Update(T item);
         void Delete(int id);
+
+        T Read(string id);
+        void Delete(string id);
     }
 }
