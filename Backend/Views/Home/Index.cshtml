@@ -1,7 +1,5 @@
-﻿@model Tuple<IEnumerable<Backend.Models.Player>, User>
+﻿@model Tuple<List<Backend.Models.Player>, Backend.Models.User>
 
-@{
-    var ownPlayers = new List<Player>();
     ViewData["Title"] = "Home Page";
 }
 
@@ -24,10 +22,6 @@
             <div id="playerShopInitializer" class="player-container">
                 @foreach (var player in Model.Item1)
                 {
-                    if (player.TeamId == Model.Item2.TeamId)
-                    {
-                        ownPlayers.Add(player);
-                    }
                     <div class="button-body">
                         @* <label class="labl"> *@
                         <input type="radio" name="shopPlayer" value="@player" checked>
@@ -83,7 +77,7 @@
                 <h2>Header</h2>
             </div>
             <div id="ownTeamInitializer" class="player-container">
-                @foreach (var player in ownPlayers)
+                @foreach (var player in Model.Item2.Team.Players)
                 {
                     <div class="button-body">
                         @* <label class="labl"> *@

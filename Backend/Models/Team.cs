@@ -24,7 +24,6 @@ namespace Backend.Models
 
         [NotMapped]
         [JsonIgnore]
-        [ForeignKey("UserId")]
         public virtual User? User { get; set; }
 
         [NotMapped]

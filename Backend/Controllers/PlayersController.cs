@@ -30,7 +30,7 @@ namespace Backend.Controllers
             var currentUser = await _userManager.FindByIdAsync(userId);
             var players = await _context.Players.Include(p => p.Team).ToListAsync();
             var model = new Tuple<List<Player>, User>(players, currentUser);
-            return View(model);
+            return View("~/Views/Home/Index.cshtml", model);
         }
 
         // GET: Players/Details/5

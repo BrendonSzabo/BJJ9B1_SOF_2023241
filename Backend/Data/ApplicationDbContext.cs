@@ -16,6 +16,7 @@ namespace Backend.Data
         public DbSet<Player> Players { get; set; }
         public DbSet<Match> Matches { get; set; }
 
+        public DbSet<User> Users { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Match>()
@@ -42,15 +43,21 @@ namespace Backend.Data
                     });
 
             modelBuilder.Entity<Team>()
-            .HasMany(t => t.Players)
-            .WithOne(p => p.Team)
-            .HasForeignKey(p => p.TeamId)
-            .OnDelete(DeleteBehavior.Cascade);
+                .HasMany(t => t.Players)
+                .WithOne(p => p.Team)
+                .HasForeignKey(p => p.TeamId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Team>()
+                .HasOne(t => t.User)
+                .WithOne(u => u.Team) // Specify the navigation property
+                .HasForeignKey<Team>(t => t.UserId) // Specify the foreign key property
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<User>()
-                .HasOne(u => u.Team)
-                .WithOne(t => t.User)
-                .HasForeignKey<Team>(t => t.UserId)
+                .HasOne(u => u.Team) // Specify the navigation property
+                .WithOne(t => t.User) // Specify the inverse navigation property
+                .HasForeignKey<Team>(t => t.UserId) // Specify the foreign key property
                 .OnDelete(DeleteBehavior.Cascade);
 
             base.OnModelCreating(modelBuilder);

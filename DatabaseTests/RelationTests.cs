@@ -28,7 +28,7 @@ namespace DatabaseTests
             CRUD_Player_Should_Work();
         }
 
-        public void Match_Should_Have_Teams()
+        private void Match_Should_Have_Teams()
         {
             // Act
             var team = _dbContext.Teams.FirstOrDefault();
@@ -42,7 +42,7 @@ namespace DatabaseTests
             team.Players.Should().NotBeNull();
         }
 
-        public void CRUD_Player_Should_Work()
+        private void CRUD_Player_Should_Work()
         {
 
             // Arrange

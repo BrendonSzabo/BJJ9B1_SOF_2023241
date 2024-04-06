@@ -8,8 +8,7 @@ namespace Backend.Models
     public class User : IdentityUser
     {
         public int Credits { get; set; }
-        [ForeignKey("Team")]
-        public int? TeamId { get; set; }
+        public int TeamId { get; set; }
         [NotMapped]
         [JsonIgnore]
         public virtual Team Team { get; set; }

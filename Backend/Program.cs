@@ -21,6 +21,25 @@ builder.Services.AddSignalR();
 
 var app = builder.Build();
 
+// Ensure the database is created and seeded
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var context = services.GetRequiredService<ApplicationDbContext>();
+        // Ensure that the database is created and migrated
+        context.Database.EnsureCreated();
+        // Seed the data
+        context.SeedData();
+    }
+    catch (Exception ex)
+    {
+        // Log any errors during seeding
+        Console.WriteLine("An error occurred while seeding the database: " + ex.Message);
+    }
+}
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -53,8 +72,3 @@ app.MapControllerRoute(
 app.MapRazorPages();
 
 app.Run();
-
-Backend.Models.Match match = new Backend.Models.Match();
-Team team = new Team();
-User user = new User();
-Player player = new Player();
