@@ -8,13 +8,11 @@ using System.Reflection.Emit;
 
 namespace DatabaseTests
 {
-    public class RelationTests
+    public class RelationTests : IDisposable
     {
         private readonly ApplicationDbContext _dbContext;
-        private readonly Fixture _fixture;
         public RelationTests()
         {
-            // Initialize your DbContext with an in-memory database for testing
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(databaseName: "TestDatabase")
                 .Options;
@@ -22,24 +20,16 @@ namespace DatabaseTests
 
             _dbContext.Database.EnsureCreated();
             _dbContext.SeedData();
-
-            _fixture = new Fixture();
-            _fixture.Behaviors.OfType<ThrowingRecursionBehavior>().ToList()
-                .ForEach(b => _fixture.Behaviors.Remove(b));
-            _fixture.Behaviors.Add(new OmitOnRecursionBehavior());
-            _fixture.Customize<User>(o => o.Without(u => u.Team));
-            _fixture.Customize<Match>(o => o.Without(u => u.Teams));
-            _fixture.Customize<Team>(o => o.Without(u => u.Matches));
-            _fixture.Customize<Team>(o => o.Without(u => u.User));
-            _fixture.Customize<Player>(o => o.Without(u => u.Team));
+        }
+        [Fact]
+        public void TestStuff_ItWontRunSequentiallyOtherwise_HorribleSolutionIDGAF()
+        {
+            Match_Should_Have_Teams();
+            CRUD_Player_Should_Work();
         }
 
-        [Fact]
         public void Match_Should_Have_Teams()
         {
-            
-            // Arrange
-
             // Act
             var team = _dbContext.Teams.FirstOrDefault();
 
@@ -51,12 +41,13 @@ namespace DatabaseTests
             team.Matches.Should().NotBeNull();
             team.Players.Should().NotBeNull();
         }
-        [Fact]
+
         public void CRUD_Player_Should_Work()
         {
 
             // Arrange
             var player = new Player(){Name = "Test Player", Image = "asd", Language = "asd", Nationality = "asd"};
+
             // Act
             _dbContext.Players.Add(player);
             _dbContext.SaveChanges();
@@ -65,6 +56,11 @@ namespace DatabaseTests
             _dbContext.Players.Should().Contain(x => x.Name == player.Name);
 
             
+        }
+
+        public void Dispose()
+        {
+            _dbContext.Dispose();
         }
     }
 }
