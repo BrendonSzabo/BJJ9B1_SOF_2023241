@@ -1,0 +1,71 @@
+img
+{
+    vertical-align: middle;
+    
+}
+
+.childL {
+    position: absolute;
+    top: 0;
+  }
+  
+  .childL-1 {
+    left: 250px;
+    top: 50px;
+    vertical-align: middle;
+    text-align: center;
+  }
+  
+
+  .parentLeft {
+    position: relative;
+  }
+
+
+.childR {
+    position: absolute;
+    /*top: 0;*/
+    
+  }
+  
+  .childR-1 {
+    margin-left: 350px;
+    margin-top: -610px;
+    vertical-align: middle;
+    text-align: center;
+  }
+
+  .childR-2 {
+    margin-left: 600px;
+    margin-top: -400px;
+    vertical-align: middle;
+    text-align: center;
+  }
+
+  .childR-3 {
+    margin-left: 625px;
+    margin-top: -250px;
+    vertical-align: middle;
+    text-align: center;
+  }
+
+  .childR-4 {
+    margin-left: 750px;
+    margin-top: -130px;
+    vertical-align: middle;
+    text-align: center;
+  }
+
+  .childR-5 {
+    margin-left: 860px;
+    margin-top: -175px;
+    vertical-align: middle;
+    text-align: center;
+  }
+  
+
+  .parentR {
+    position: relative;
+    /*margin-top: 10px;*/
+  }
+
