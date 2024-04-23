@@ -1,0 +1,35 @@
+﻿﻿@using Microsoft.AspNetCore.Identity
+@model IEnumerable<Player>
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+@if (await UserManager.IsInRoleAsync(await UserManager.GetUserAsync(User), "Admin"))
+{
+    <div id="createbtn">
+        <a asp-action="AddMeeting" class="btn btn-success">Create +</a>
+    </div>
+}
+
+
+
+@foreach (var player in Model)
+{
+    <div class="button-body">
+        @* <label class="labl"> *@
+        <div class="listbutton-main">
+            <div class="listbutton-column">
+                <div class="listbutton-icon">
+                    <img src="@player.Image" class="profile-image" />
+                </div>
+            </div>
+            <div class="listbutton-column-text">
+                <div class="listbutton-text">@player.Name</div>
+                <div class="listbutton-text">@player.Role</div>
+            </div>
+            <div class="listbutton-column">
+                <div class="listbutton-text">@player.Rating</div>
+            </div>
+        </div>
+        @* </label> *@
+    </div>
+}

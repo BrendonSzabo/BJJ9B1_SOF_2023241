@@ -1,0 +1,99 @@
+@model Tuple<List<Backend.Models.Player>, Backend.Models.User>
+
+@{
+    var buyablePlayers = Model.Item1;
+    var user = Model.Item2;
+    foreach (var shopPlayer in buyablePlayers)
+    {
+        if (user.Team.Players.FirstOrDefault(x => x.Id == shopPlayer.Id) != null)
+        {
+            buyablePlayers.Remove(shopPlayer);
+        }
+    }
+    ViewData["Title"] = "Home Page";
+}}
+
+<!DOCTYPE html>
+<html>
+<head >
+    <link rel="stylesheet" href="TeamEditorStyle.css">
+    <link rel="stylesheet" href="~/css/main.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body style="background-color:black;">
+    <table width="100%">
+        <tr>
+            <td width="30%" >
+                <div class="parentLeft">
+                    <img src="SelectorBackground.png" alt="" >
+                    <div>
+                        @foreach (var player in buyablePlayers)
+                        {
+                            <div class="button-body">
+                                <input type="radio" name="shopPlayer" value="@player" checked>
+                                <div class="listbutton-main">
+                                    <div class="listbutton-column">
+                                        <div class="listbutton-icon">
+                                            <img src="@player.Image" class="profile-image" />
+                                        </div>
+                                    </div>
+                                    <div class="listbutton-column-text">
+                                        <div class="listbutton-text">@player.Name</div>
+                                        <div class="listbutton-text">@player.Role</div>
+                                    </div>
+                                    <div class="listbutton-column">
+                                        <div class="listbutton-text">@player.Rating</div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                <div>
+            </td>
+            <td  width="70%" align="center" style="vertical-align: top;">
+                <div class="parentR">
+                    <img src="map.png" alt="" >
+                    <div class="childR childR-1">
+                        <img src="PlayerBorder.png" alt="" width="75" height="75">
+                        <div>
+                            <input type="radio" name="userPlayer" value="@user.Team.Players.FirstOrDefault(x => x.Role == RoleEnum.Top)" checked>
+                            <img src="@user.Team.Players.FirstOrDefault(x => x.Role == RoleEnum.Top).Image" alt="" width="75" height="75">
+                        </div>
+                    </div>
+                    <div class="childR childR-2">
+                        <img src="PlayerBorder.png" alt="" width="75" height="75">
+                        <div>
+                            <input type="radio" name="userPlayer" value="@user.Team.Players.FirstOrDefault(x => x.Role == RoleEnum.Mid)" checked>
+                            <img src="@user.Team.Players.FirstOrDefault(x => x.Role == RoleEnum.Mid).Image" alt="" width="75" height="75">
+                        </div>
+                    </div>
+                    <div class="childR childR-3">
+                        <img src="PlayerBorder.png" alt="" width="75" height="75">
+                        <div>
+                            <input type="radio" name="userPlayer" value="@user.Team.Players.FirstOrDefault(x => x.Role == RoleEnum.Jungle)" checked>
+                            <img src="@user.Team.Players.FirstOrDefault(x => x.Role == RoleEnum.Jungle).Image" alt="" width="75" height="75">
+                        </div>
+                    </div>
+                    <div class="childR childR-4">
+                        <img src="PlayerBorder.png" alt="" width="75" height="75">
+                        <div>
+                            <input type="radio" name="userPlayer" value="@user.Team.Players.FirstOrDefault(x => x.Role == RoleEnum.Support)" checked>
+                            <img src="@user.Team.Players.FirstOrDefault(x => x.Role == RoleEnum.Support).Image" alt="" width="75" height="75">
+                        </div>
+                    </div>
+                    <div class="childR childR-5">
+                        <img src="PlayerBorder.png" alt="" width="75" height="75">
+                        <div>
+                            <input type="radio" name="userPlayer" value="@user.Team.Players.FirstOrDefault(x => x.Role == RoleEnum.ADC)" checked>
+                            <img src="@user.Team.Players.FirstOrDefault(x => x.Role == RoleEnum.ADC).Image" alt="" width="75" height="75">
+                        </div>
+                    </div>
+                <div>
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>
+

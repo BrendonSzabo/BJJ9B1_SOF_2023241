@@ -5,8 +5,10 @@ using System.Text.Json.Serialization;
 
 namespace Backend.Models
 {
-    public class User : IdentityUser
+    public class User : IdentityUser, IModelBase
     {
+        public string? ContentType { get; set; }
+        public byte[]? Data { get; set; }
         public int Credits { get; set; }
         public int TeamId { get; set; }
         [NotMapped]

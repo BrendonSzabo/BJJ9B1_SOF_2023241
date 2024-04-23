@@ -1,0 +1,68 @@
+﻿@model Player
+
+<h4>Player</h4>
+<hr />
+<div class="row">
+    @if (TempData["WarningMessage"] != null)
+    {
+        <div class="alert alert-warning" id="warning-alert">
+            @TempData["WarningMessage"]
+        </div>
+    }
+    <div class="col-md-4">
+        <form asp-action="AddMeeting">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div id="addmargindiv" class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" required maxlength="15" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div id="addmargindiv" class="form-group">
+                <label asp-for="Image" class="control-label"></label>
+                <input asp-for="Image" class="form-control" required maxlength="30" />
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+            <div id="addmargindiv" class="form-group">
+                <label asp-for="Rating" class="control-label"></label>
+                <input asp-for="Rating" class="form-control" required maxlength="3" />
+                <span asp-validation-for="Rating" class="text-danger"></span>
+            </div>
+            <div id="addmargindiv" class="form-group">
+                <label asp-for="Role" class="control-label"></label>
+                <input asp-for="Role" class="form-control" required maxlength="9" />
+                <span asp-validation-for="Role" class="text-danger"></span>
+            </div>
+            <div id="addmargindiv" class="form-group">
+                <label asp-for="Nationality" class="control-label"></label>
+                <input asp-for="Nationality" class="form-control" required maxlength="20" />
+                <span asp-validation-for="Nationality" class="text-danger"></span>
+            </div>
+            <div id="addmargindiv" class="form-group">
+                <label asp-for="YearsAsPro" class="control-label"></label>
+                <input asp-for="YearsAsPro" class="form-control" required maxlength="20" />
+                <span asp-validation-for="YearsAsPro" class="text-danger"></span>
+            </div>
+            <div id="addmargindiv" class="form-group">
+                <input type="submit" value="Create" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="addmargindiv">
+    <a asp-action="ListMeetings" class="btn btn-danger">Back to List</a>
+</div>
+
+<script>
+    function hideAlert() {
+        $('#warning-alert').alert('close');
+        $.ajax({
+            url: '/Model/ResetWarningMessage',
+            method: 'POST',
+            success: function () {
+            }
+        });
+    }
+
+    setTimeout(hideAlert, 5000);
+</script>

@@ -60,6 +60,10 @@ namespace Backend.Data
                 .HasForeignKey<Team>(t => t.UserId) // Specify the foreign key property
                 .OnDelete(DeleteBehavior.Cascade);
 
+            modelBuilder.Entity<IdentityRole>().HasData(
+                new { Id = "1", Name = "Admin", NormalizedName = "ADMIN" },
+                new { Id = "2", Name = "Player", NormalizedName = "PLAYER" });
+
             base.OnModelCreating(modelBuilder);
         }
 

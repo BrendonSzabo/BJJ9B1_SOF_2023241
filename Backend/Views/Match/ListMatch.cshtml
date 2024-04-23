@@ -1,0 +1,84 @@
+﻿﻿@using Microsoft.AspNetCore.Identity
+@model IEnumerable<Match>
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+<h4>Match</h4>
+@if ((await UserManager.IsInRoleAsync(await UserManager.GetUserAsync(User), "Admin")))
+{
+    <div id="createbtn">
+        <a asp-action="AddMeeting" class="btn btn-success">Create +</a>
+    </div>
+}
+<hr />
+
+<div class="row">
+    @if (TempData["DeleteSuccessMessage"] != null)
+    {
+        <div class="alert alert-success" id="delete-success-alert">
+            @TempData["DeleteSuccessMessage"]
+        </div>
+    }
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success" id="success-alert">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+        @foreach (var item in Model)
+        {
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Teams.ToList()[0].Name Vs. @item.Teams.ToList()[1].Name</h5>
+                        <div style="display: flex">
+                            <div class="box">
+                                <div class="header">
+                                    <h2>@item.Teams.ToList()[0].Name</h2>
+                                </div>
+                                <div class="section">@item.Team1Score</div>
+                            </div>
+                            <div class="box">
+                                <div class="header">
+                                    <h2>@item.Teams.ToList()[1].Name</h2>
+                                </div>
+                                <div class="section">@item.Team2Score</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+
+    function hideAlert() {
+        $('#success-alert').alert('close');
+        $.ajax({
+            url: '/Model/ResetSuccessMessage',
+            method: 'POST',
+            success: function () {
+            }
+        });
+    }
+
+    setTimeout(hideAlert, 5000);
+</script>
+
+<script>
+    function hideDeleteSuccessAlert() {
+        $('#delete-success-alert').alert('close');
+        $.ajax({
+            url: '/Model/ResetDeleteSuccessMessage',
+            method: 'POST',
+            success: function () {
+            }
+        });
+    }
+
+    setTimeout(hideDeleteSuccessAlert, 5000);
+</script>

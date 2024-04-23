@@ -1,0 +1,79 @@
+@model Backend.Models.Team
+@{
+    ViewData["Title"] = "Home Page";
+    var unfinishedMatches = Model.Matches.Where(x => x.WinnerId == null && x.LoserId == null).ToList();
+    var finishedMatches = Model.Matches.Where(x => x.WinnerId != null && x.LoserId != null).ToList();
+}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="MatchViewerStyle.css">
+</head>
+
+
+<body>
+    <label style="color: yellow;" >Következő meccsek</label>
+    <table width="100%">
+        <tr>
+            @foreach (var item in unfinishedMatches)
+            {
+                <td style="border-color: yellow; border-style: double; border-width: thick; margin-bottom: 50px;">
+                    <table width="100%">
+                        <tr>
+                            <td width="20%" align="left">
+                                <label>@item.Teams.ToList()[0]</label>
+                            </td>
+                            <td width="20%" align="right">
+                                <label>321</label>
+                            </td>
+                            <td width="20%" align="center">
+                                <label>-</label>
+                            </td>
+                            <td width="20%" align="left">
+                                <label>321</label>
+                            </td>
+                            <td width="20%" align="right">
+                                <label>@item.Teams.ToList()[1]</label>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            }
+        </tr> 
+    </table>
+    <label style="color: green; " >Befejezett meccsek</label>
+    <table width="100%">
+       <tr>
+            @foreach (var item in finishedMatches)
+            {
+                <td style="border-color: green; border-style: double; border-width: thick; margin-bottom: 50px;">
+                    <table width="100%">
+                        <tr>
+                            <td width="20%" align="left">
+                                <label>@item.Teams.ToList()[0]</label>
+                            </td>
+                            <td width="20%" align="right">
+                                <label>321</label>
+                            </td>
+                            <td width="20%" align="center">
+                                <label>-</label>
+                            </td>
+                            <td width="20%" align="left">
+                                <label>321</label>
+                            </td>
+                            <td width="20%" align="right">
+                                <label>@item.Teams.ToList()[1]</label>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            }
+        </tr>
+    </table>
+
+
+</body>
+
+</html>

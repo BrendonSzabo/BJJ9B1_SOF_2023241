@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace Backend.Models
 {
-    public class Player
+    public class Player : IModelBase
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -26,10 +26,10 @@ namespace Backend.Models
         public string Nationality { get; set; }
         public int YearsAsPro { get; set; }
         [ForeignKey("Team")]
-        public int TeamId { get; set; }
+        public int? TeamId { get; set; }
         [NotMapped]
         [JsonIgnore]
-        public virtual Team Team { get; set; }
+        public virtual Team? Team { get; set; }
         public Player()
         {
         }

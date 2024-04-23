@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace Backend.Models
 {
-    public class Team
+    public class Team : IModelBase
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
