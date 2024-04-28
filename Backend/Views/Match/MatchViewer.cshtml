@@ -15,7 +15,7 @@
 
 <body>
     <label style="color: yellow;" >Következő meccsek</label>
-    <table width="100%">
+    <table width="100%">@*  ez a tábla tartalmazza a következő meccsek listáját *@
         <tr>
             @foreach (var item in unfinishedMatches)
             {
@@ -23,19 +23,19 @@
                     <table width="100%">
                         <tr>
                             <td width="20%" align="left">
-                                <label>@item.Teams.ToList()[0]</label>
+                                <label>@item.Teams.ToList()[0]</label> @* ide jön az A csapat neve *@
                             </td>
                             <td width="20%" align="right">
-                                <label>321</label>
+                                <label>-</label> @* itt statikusan elég egy '-' jel mivel még nem lett lejátszva a meccs *@
                             </td>
                             <td width="20%" align="center">
-                                <label>-</label>
+                                <label>-</label> @* szépség kedvéért egy kis - jel *@
                             </td>
                             <td width="20%" align="left">
-                                <label>321</label>
+                                <label>-</label> @* itt statikusan elég egy '-' jel mivel még nem lett lejátszva a meccs *@
                             </td>
                             <td width="20%" align="right">
-                                <label>@item.Teams.ToList()[1]</label>
+                                <label>@item.Teams.ToList()[1]</label> @* ide jön a B csapat neve *@
                             </td>
                         </tr>
                     </table>
@@ -45,6 +45,7 @@
     </table>
     <label style="color: green; " >Befejezett meccsek</label>
     <table width="100%">
+        @*  ez a tábla tartalmazza a befejeztett meccsek listáját *@
        <tr>
             @foreach (var item in finishedMatches)
             {
@@ -52,19 +53,19 @@
                     <table width="100%">
                         <tr>
                             <td width="20%" align="left">
-                                <label>@item.Teams.ToList()[0]</label>
+                                <label>@item.Teams.ToList()[0]</label> @* ide jön az A csapat neve *@
                             </td>
                             <td width="20%" align="right">
-                                <label>321</label>
+                                <label>321</label> @* ide jön az A csapat pontszáma *@
                             </td>
                             <td width="20%" align="center">
                                 <label>-</label>
                             </td>
                             <td width="20%" align="left">
-                                <label>321</label>
+                                <label>321</label>  @* ide jön az B csapat pontszáma *@
                             </td>
                             <td width="20%" align="right">
-                                <label>@item.Teams.ToList()[1]</label>
+                                <label>@item.Teams.ToList()[1]</label> @* ide jön az B csapat neve *@
                             </td>
                         </tr>
                     </table>
