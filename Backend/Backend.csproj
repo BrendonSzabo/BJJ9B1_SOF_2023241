@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Areas\Identity\Pages\Account\ExternalLogin.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
 	  <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="6.0.21" />
 	  <PackageReference Include="Microsoft.AspNetCore.Authentication.MicrosoftAccount" Version="6.0.24" />
     <PackageReference Include="Microsoft.AspNet.SignalR" Version="2.4.3" />
@@ -29,6 +33,27 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Identity\Pages\Account\ExternalLogin.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\ExternalLogin.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_WebToolingArtifacts Remove="Properties\ServiceDependencies\profile.arm.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Properties\ServiceDependencies\profile.arm.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Areas\Identity\Pages\Account\ExternalLogin.cshtml" />
+    <None Include="Properties\serviceDependencies.local.json.user" />
   </ItemGroup>
 
 </Project>

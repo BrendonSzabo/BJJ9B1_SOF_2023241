@@ -7,6 +7,8 @@ namespace Backend.Models
 {
     public class User : IdentityUser, IModelBase
     {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string? ContentType { get; set; }
         public byte[]? Data { get; set; }
         public int Credits { get; set; }
