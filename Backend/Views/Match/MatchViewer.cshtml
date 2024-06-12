@@ -53,16 +53,16 @@
                     <table width="100%">
                         <tr>
                             <td width="20%" align="left">
-                                <label>@item.Teams.ToList()[0]</label> @* ide jön az A csapat neve *@
+                                <label>@item.Teams.ToList()[0].Name</label> @* ide jön az A csapat neve *@
                             </td>
                             <td width="20%" align="right">
-                                <label>321</label> @* ide jön az A csapat pontszáma *@
+                                <label>@item.Team1Score</label> @* ide jön az A csapat pontszáma *@
                             </td>
                             <td width="20%" align="center">
                                 <label>-</label>
                             </td>
                             <td width="20%" align="left">
-                                <label>321</label>  @* ide jön az B csapat pontszáma *@
+                                <label>@item.Team2Score</label>  @* ide jön az B csapat pontszáma *@
                             </td>
                             <td width="20%" align="right">
                                 <label>@item.Teams.ToList()[1]</label> @* ide jön az B csapat neve *@
