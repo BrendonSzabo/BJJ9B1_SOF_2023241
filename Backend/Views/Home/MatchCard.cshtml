@@ -1,0 +1,49 @@
+﻿<style>
+    /* Clear floats after columns */
+    .matchCard {
+        display: flex;
+        height: 68px;
+        border: 1px solid #ccc;
+        background-color: #f2f2f2;
+    }
+
+        .matchCard::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+    .teamName {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        float: left;
+        width: 68px;
+        height: 68px;
+        padding: 10px;
+        box-sizing: border-box; /* Ensures padding doesn't affect width */
+        border: 1px solid #ccc;
+        background-color: cyan;
+    }
+
+    .matchScore {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        float: left;
+        width: 200px;
+        height: 100%;
+        padding: 0px;
+        box-sizing: border-box; /* Ensures padding doesn't affect width */
+        border: 1px solid #ccc;
+        background-color: white;
+    }
+
+</style>
+<div class="matchCard">
+    <div class="teamName">team 1 name</div>
+    <div class="matchScore">
+        <div>t1 score ----- t2 score</div>
+    </div>
+    <div class="teamName">team 2 name</div>
+</div>

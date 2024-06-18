@@ -3,3 +3,106 @@
     var team = ViewBag.Team as Team;
 }
 
+<style>
+    /* Basic CSS for layout */
+    .column {
+        float: left;
+        width: 33.33%; /* Each column takes up one-third of the container */
+        padding: 10px;
+        box-sizing: border-box; /* Ensures padding doesn't affect width */
+        height: 90vh;
+        border: 1px solid #ccc;
+        background-color: #f2f2f2;
+    }
+
+    /* Clear floats after columns */
+    .row::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+    .imagecontainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 45%; /* Adjust height of container as needed */
+    }
+
+        .imagecontainer img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+    .matchcontainer {
+        height: 55%;
+    }
+
+    .header {
+        height: 8vh;
+    }
+
+        .header::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+    .headercolumn {
+        float: left;
+        width: 33.33%; /* Each column takes up one-third of the container */
+        height: 100%;
+        padding: 10px;
+        margin: 0px 0px 5px 0px;
+        box-sizing: border-box; /* Ensures padding doesn't affect width */
+        background-color: #f2f2f2;
+    }
+
+    .btn-link {
+        display: inline-block;
+        background-color: #007bff; /* Bootstrap primary color for button */
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 20px;
+        margin: 0px 5px 0px 5px;
+        border-radius: 5px;
+        text-align: center;
+    }
+
+        .btn-link:hover {
+            background-color: #0056b3; /* Darker shade for hover effect */
+            text-decoration: none;
+        }
+</style>
+
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Three Columns Example</title>
+</head>
+<body>
+    <div class="header">
+        <div class="headercolumn" style="width: 85%;">Credits: insert credit amount here</div>
+        <div class="headercolumn btn-link" style="width: 7%;">Profile @Html.ActionLink("View Profile", "Profile", "User", new { id = Model.Id }, new { @class = "btn-link" })</div>
+        <div class="headercolumn btn-link" style="width: 7%;">Logout @Html.ActionLink("Logout", "Logout", "Account", null, new { @class = "btn-link" })</div>
+    </div>
+    <div class="row">
+        <div class="column">
+            List of player user can buy go here
+        </div>
+        <div class="column">
+            <div class="imagecontainer">
+                <img src="https://imgs.search.brave.com/7acQSbau71tA1h-TNqEcySXOWaIbge6zpqNea4a8MTA/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9wcm9k/LmFzc2V0cy5lYXJs/eWdhbWVjZG4uY29t/L2ltYWdlcy9TdW1t/b25lci1SaWZ0LU1h/cC5wbmc_dHJhbnNm/b3JtPWFydGljbGVf/d2VicA" alt="Sample Image">
+            </div>
+            <div class="matchcontainer"> Match history goes here</div>
+        </div>
+        <div class="column">
+            List of owned players go here
+        </div>
+    </div>
+
+</body>
+</html>
+
