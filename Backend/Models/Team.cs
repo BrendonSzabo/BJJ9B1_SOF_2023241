@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Backend.Models
@@ -10,11 +11,11 @@ namespace Backend.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Name { get; set; }
-        public TournamentRegion Region { get; set; }
-        public int Chemistry { get; set; }
-        public int Rating { get; set; }
-        public int Wins { get; set; }
-        public int Losses { get; set; }
+        public RegionEnum Region { get; set; }
+        public int Chemistry { get { return CalculateChemistry(); } set { } }
+        public int Rating { get { return CalculateRating(); } set { } }
+        public int Wins { get { return Matches.Count(x => x.WinnerId == Id); } set { } }
+        public int Losses { get { return Matches.Count(x => x.LoserId == Id); } set { } }
         public string UserId { get; set; }
         public int? TopId { get; set; }
         public int? JungleId { get; set; }
@@ -40,17 +41,85 @@ namespace Backend.Models
             Players = new HashSet<Player>();
         }
 
-        public Team(string name, TournamentRegion region, int chemistry, int rating, int wins, int losses, User? user)
+        public Team(string name, RegionEnum region, int rating, int wins, int losses, User? user)
         {
             Name = name;
             Region = region;
-            Chemistry = chemistry;
             Rating = rating;
             Wins = wins;
             Losses = losses;
             User = user;
             Matches = new HashSet<Match>();
             Players = new HashSet<Player>();
+        }
+
+        private int CalculateChemistry()
+        {
+            if (Players != null && Players.Count == 5)
+            {
+                int chemistry = 0;
+                int distinctLangs = 5 - Players.Select(p => p.Language).Distinct().Count();
+                int distinctNationality = 5 - Players.Select(p => p.Nationality).Distinct().Count();
+                chemistry += distinctLangs;
+                chemistry += distinctNationality;
+                CheckRole(ref chemistry);
+
+                return chemistry * 100 / 15;
+            }
+            return 0;
+        }
+
+        private void CheckRole(ref int chemistry)
+        {
+            foreach (Player player in Players)
+            {
+                switch (player.Role)
+                {
+                    case RoleEnum.Top:
+                        if (player.Id == TopId)
+                        {
+                            chemistry += 1;
+                        }
+                        break;
+                    case RoleEnum.Jungle:
+                        if (player.Id == JungleId)
+                        {
+                            chemistry += 1;
+                        }
+                        break;
+                    case RoleEnum.Mid:
+                        if (player.Id == TopId)
+                        {
+                            chemistry += 1;
+                        }
+                        break;
+                    case RoleEnum.ADC:
+                        if (player.Id == ADCId)
+                        {
+                            chemistry += 1;
+                        }
+                        break;
+                    case RoleEnum.Support:
+                        if (player.Id == SupportId)
+                        {
+                            chemistry += 1;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        private int CalculateRating()
+        {
+            Rating = 0;
+            foreach (Player player in Players)
+            {
+                Rating += player.Rating;
+            }
+            Rating += Chemistry;
+            return Rating * 100 / 600;
         }
     }
 }

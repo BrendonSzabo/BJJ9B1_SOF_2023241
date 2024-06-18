@@ -12,7 +12,7 @@ namespace Backend.Models
         public int Team1Score { get; set; }
         public int Team2Score { get; set; }
         public string Date { get; set; }
-        public TournamentRegion Tournament { get; set; }
+        public RegionEnum Region { get; set; }
         public int WinnerCredits { get; set; }
         public int LoserCredits { get; set; }
         public int? WinnerId { get; set; }

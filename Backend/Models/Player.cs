@@ -14,16 +14,9 @@ namespace Backend.Models
         public string Image { get; set; }
         public int Rating { get; set; }
         public RoleEnum Role { get; set; }
-        public PlayerRegion Region { get {
-                switch (Nationality)
-                { 
-                    default:
-                        break;
-                }
-                return PlayerRegion.AMERICAS;
-            } set { } }
+        public RegionEnum Region { get { return Team == null ? RegionEnum.NotInATeam : Team.Region; } set { } }
         public string Language { get; set; }
-        public string Nationality { get; set; }
+        public NationalityEnum Nationality { get; set; }
         public int YearsAsPro { get; set; }
         [ForeignKey("Team")]
         public int? TeamId { get; set; }
@@ -34,7 +27,7 @@ namespace Backend.Models
         {
         }
 
-        public Player(string name, string image, int rating, RoleEnum role, string language, string nationality, int age, int teamId)
+        public Player(string name, string image, int rating, RoleEnum role, string language, NationalityEnum nationality, int age, int teamId)
         {
             Name = name;
             Image = image;
@@ -45,5 +38,6 @@ namespace Backend.Models
             YearsAsPro = age;
             TeamId = teamId;
         }
+
     }
 }

@@ -74,19 +74,19 @@ namespace Backend.Data
             User user1 = new User("user1");
             User user2 = new User("user2");
 
-            Team team1 = new Team("Team A", TournamentRegion.LEC, 90, 85, 10, 1, null);
-            Team team2 = new Team("Team B", TournamentRegion.LCK, 85, 80, 9, 2, null);
+            Team team1 = new Team("Team A", RegionEnum.LEC, 90, 10, 1, null);
+            Team team2 = new Team("Team B", RegionEnum.LCK, 80, 9, 2, null);
 
-            Player player1 = new Player("John Doe", "~/lib/assets/placeholder.jpg", 85, RoleEnum.Top, "English", "USA", 5, team1.Id);
-            Player player2 = new Player("Alice Smith", "~/lib/assets/placeholder.jpg", 82, RoleEnum.Jungle, "Spanish", "Spain", 7, team1.Id);
-            Player player3 = new Player("Michael Johnson", "~/lib/assets/placeholder.jpg", 78, RoleEnum.Mid, "French", "France", 6, team1.Id);
-            Player player4 = new Player("Emily Brown", "~/lib/assets/placeholder.jpg", 80, RoleEnum.ADC, "German", "Germany", 4, team1.Id);
-            Player player5 = new Player("David Wilson", "~/lib/assets/placeholder.jpg", 83, RoleEnum.Support, "Italian", "Italy", 8, team1.Id);
-            Player player6 = new Player("Sophia Garcia", "~/lib/assets/placeholder.jpg", 79, RoleEnum.Top, "Portuguese", "Portugal", 3, team2.Id);
-            Player player7 = new Player("James Martinez", "~/lib/assets/placeholder.jpg", 81, RoleEnum.Jungle, "Dutch", "Netherlands", 9, team2.Id);
-            Player player8 = new Player("Isabella Rodriguez", "~/lib/assets/placeholder.jpg", 77, RoleEnum.Mid, "Russian", "Russia", 5, team2.Id);
-            Player player9 = new Player("Daniel Brown", "~/lib/assets/placeholder.jpg", 84, RoleEnum.ADC, "Swedish", "Sweden", 6, team2.Id);
-            Player player10 = new Player("Olivia Lopez", "~/lib/assets/placeholder.jpg", 76, RoleEnum.Support, "Japanese", "Japan", 7, team2.Id);
+            Player player1 = new Player("John Doe", "~/lib/assets/placeholder.jpg", 85, RoleEnum.Top, "English", NationalityEnum.CN, 5, team1.Id);
+            Player player2 = new Player("Alice Smith", "~/lib/assets/placeholder.jpg", 82, RoleEnum.Jungle, "Spanish", NationalityEnum.CN, 7, team1.Id);
+            Player player3 = new Player("Michael Johnson", "~/lib/assets/placeholder.jpg", 78, RoleEnum.Mid, "French", NationalityEnum.CN, 6, team1.Id);
+            Player player4 = new Player("Emily Brown", "~/lib/assets/placeholder.jpg", 80, RoleEnum.ADC, "German", NationalityEnum.CN, 4, team1.Id);
+            Player player5 = new Player("David Wilson", "~/lib/assets/placeholder.jpg", 83, RoleEnum.Support, "Italian", NationalityEnum.CN, 8, team1.Id);
+            Player player6 = new Player("Sophia Garcia", "~/lib/assets/placeholder.jpg", 79, RoleEnum.Top, "Portuguese", NationalityEnum.CN, 3, team2.Id);
+            Player player7 = new Player("James Martinez", "~/lib/assets/placeholder.jpg", 81, RoleEnum.Jungle, "Dutch", NationalityEnum.CN, 9, team2.Id);
+            Player player8 = new Player("Isabella Rodriguez", "~/lib/assets/placeholder.jpg", 77, RoleEnum.Mid, "Russian", NationalityEnum.CN, 5, team2.Id);
+            Player player9 = new Player("Daniel Brown", "~/lib/assets/placeholder.jpg", 84, RoleEnum.ADC, "Swedish", NationalityEnum.CN, 6, team2.Id);
+            Player player10 = new Player("Olivia Lopez", "~/lib/assets/placeholder.jpg", 76, RoleEnum.Support, "Japanese", NationalityEnum.CN, 7, team2.Id);
 
             team1.Players.Add(player1);
             team1.Players.Add(player2);
@@ -127,7 +127,7 @@ namespace Backend.Data
             match1.Teams.Add(team1);
             match1.Teams.Add(team2);
             match1.Date = new DateTime(2021, 10, 10).ToString();
-            match1.Tournament = TournamentRegion.LCK;
+            match1.Region = RegionEnum.LCK;
             match1.WinnerCredits = 100;
             match1.LoserCredits = 50;
             match1.WinnerId = team1.Id;
