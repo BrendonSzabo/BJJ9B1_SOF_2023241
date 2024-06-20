@@ -52,4 +52,9 @@ public class ModelLogic<T> where T : class, IModelBase
     {
         return await _db.Set<T>().ToListAsync();
     }
+
+    public async Task<User> GetUser(string id)
+    {
+        return await _db.Set<User>().FindAsync(id);
+    }
 }

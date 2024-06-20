@@ -1,0 +1,56 @@
+﻿@model Match
+@using Backend.WebHelpers
+@{
+    var winningTeam = Model.Teams.First(x => x.Id == Model.WinnerId);
+    var losingTeam = Model.Teams.First(x => x.Id != Model.WinnerId);
+    string winner64Img = Convert.ToBase64String(winningTeam.User.Data);
+    string winnerImgSrc = String.Format("data:image/png;base64,{0}", winner64Img);
+    string loser64Img = Convert.ToBase64String(losingTeam.User.Data);
+    string loserImgSrc = String.Format("data:image/png;base64,{0}", loser64Img);
+}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{@winningTeam.Name} vs. {@losingTeam.Name}</title>
+    <link rel="stylesheet" href="~/css/matchStyle.css" />
+    <link href="https://fonts.googleapis.com/css?family=Marcellus+SC" rel="stylesheet">
+</head>
+<body>
+    <header>
+        @await Html.PartialAsync("_HeaderNavbar")
+    </header>
+    <div class="header">
+        <span> <strong>{@winningTeam.Name}</strong> vs. <strong>{@losingTeam.Name}</strong></span>
+    </div>
+    <div class="container">
+        <img src="@winnerImgSrc" alt="winner image" class="image-left">
+        <div class="middle">
+            <div class="number">@Math.Max(Model.Team1Score, Model.Team2Score)</div>
+            <div class="line"></div>
+            <div class="number">@Math.Min(Model.Team1Score, Model.Team2Score)</div>
+        </div>
+        <img src="@loserImgSrc" alt="loser Image" class="image-right">
+    </div>
+    <div class="footer row">
+        <div class="column">
+            @foreach (Player player in winningTeam.Players)
+            {
+                <form id="playerForm-@player.Id" class="player-card" draggable="true" ondragstart="onDragStart(event)" asp-action="PlayerDetails" asp-controller="Home" method="post">
+                    @Html.Raw(Helpers.CreatePlayerCard(player, false))
+                    <input type="hidden" id="playerId-@player.Id" name="id" value="@player.Id" />
+                </form>
+            }
+        </div>
+        <div class="column">
+            @foreach (Player player in losingTeam.Players)
+            {
+                <form id="playerForm-@player.Id" class="player-card" draggable="true" ondragstart="onDragStart(event)" asp-action="PlayerDetails" asp-controller="Home" method="post">
+                    @Html.Raw(Helpers.CreatePlayerCard(player, false))
+                    <input type="hidden" id="playerId-@player.Id" name="id" value="@player.Id" />
+                </form>
+            }
+        </div>
+    </div>
+</body>
+</html>

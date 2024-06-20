@@ -1,108 +1,81 @@
-﻿@{
-    var user = ViewBag.User as User;
-    var team = ViewBag.Team as Team;
+﻿@using Microsoft.AspNetCore.Identity
+@using Backend.WebHelpers
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+@{
+    if (SignInManager.IsSignedIn(User) is false)
+    {
+        var loginUrl = Url.Page("/Account/Login", new { area = "Identity" });
+        <script>
+            window.location.href = '@loginUrl';
+        </script>
+    }
+    @if (ViewBag.User is null || ViewBag.Team is null || ViewBag.ShopPlayers is null)
+    {
+        var errorUrl = Url.Action("Error", "Home");
+        <script>
+            window.location.href = '@errorUrl';
+        </script>
+    }
+    var user = ViewBag.User;
+    var team = ViewBag.Team;
+    var shopPlayers = ViewBag.ShopPlayers;
 }
-
-<style>
-    /* Basic CSS for layout */
-    .column {
-        float: left;
-        width: 33.33%; /* Each column takes up one-third of the container */
-        padding: 10px;
-        box-sizing: border-box; /* Ensures padding doesn't affect width */
-        height: 90vh;
-        border: 1px solid #ccc;
-        background-color: #f2f2f2;
-    }
-
-    /* Clear floats after columns */
-    .row::after {
-        content: "";
-        clear: both;
-        display: table;
-    }
-
-    .imagecontainer {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 45%; /* Adjust height of container as needed */
-    }
-
-        .imagecontainer img {
-            max-width: 100%;
-            max-height: 100%;
-        }
-
-    .matchcontainer {
-        height: 55%;
-    }
-
-    .header {
-        height: 8vh;
-    }
-
-        .header::after {
-            content: "";
-            clear: both;
-            display: table;
-        }
-
-    .headercolumn {
-        float: left;
-        width: 33.33%; /* Each column takes up one-third of the container */
-        height: 100%;
-        padding: 10px;
-        margin: 0px 0px 5px 0px;
-        box-sizing: border-box; /* Ensures padding doesn't affect width */
-        background-color: #f2f2f2;
-    }
-
-    .btn-link {
-        display: inline-block;
-        background-color: #007bff; /* Bootstrap primary color for button */
-        color: #fff;
-        text-decoration: none;
-        padding: 10px 20px;
-        margin: 0px 5px 0px 5px;
-        border-radius: 5px;
-        text-align: center;
-    }
-
-        .btn-link:hover {
-            background-color: #0056b3; /* Darker shade for hover effect */
-            text-decoration: none;
-        }
-</style>
 
 <html lang="en">
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Three Columns Example</title>
+    <link rel="stylesheet" href="~/css/dash.css"/>
+    <script type="text/javascript" src="~/js/dash.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Marcellus+SC" rel="stylesheet">
 </head>
 <body>
-    <div class="header">
-        <div class="headercolumn" style="width: 85%;">Credits: insert credit amount here</div>
-        <div class="headercolumn btn-link" style="width: 7%;">Profile @Html.ActionLink("View Profile", "Profile", "User", new { id = Model.Id }, new { @class = "btn-link" })</div>
-        <div class="headercolumn btn-link" style="width: 7%;">Logout @Html.ActionLink("Logout", "Logout", "Account", null, new { @class = "btn-link" })</div>
-    </div>
+    <header>
+        @await Html.PartialAsync("_HeaderNavbar")
+    </header>
     <div class="row">
         <div class="column">
-            List of player user can buy go here
+            @foreach (Player player in shopPlayers)
+            {
+                <form id="playerForm-@player.Id" asp-action="PlayerDetails" asp-controller="Home" method="post">
+                    @Html.Raw(Helpers.CreatePlayerCard(player, true))
+                    <input type="hidden" id="matchId-@player.Id" name="id" value="@player.Id" />
+                </form>
+            }
         </div>
         <div class="column">
-            <div class="imagecontainer">
-                <img src="https://imgs.search.brave.com/7acQSbau71tA1h-TNqEcySXOWaIbge6zpqNea4a8MTA/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9wcm9k/LmFzc2V0cy5lYXJs/eWdhbWVjZG4uY29t/L2ltYWdlcy9TdW1t/b25lci1SaWZ0LU1h/cC5wbmc_dHJhbnNm/b3JtPWFydGljbGVf/d2VicA" alt="Sample Image">
+            <div class="imagecontainer" id="map">
+                <img src="https://imgs.search.brave.com/7acQSbau71tA1h-TNqEcySXOWaIbge6zpqNea4a8MTA/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9wcm9k/LmFzc2V0cy5lYXJs/eWdhbWVjZG4uY29t/L2ltYWdlcy9TdW1t/b25lci1SaWZ0LU1h/cC5wbmc_dHJhbnNm/b3JtPWFydGljbGVf/d2VicA" alt="Map Image">
+                <div id="toplaner" class="laner-box toplaner"></div>
+                <div id="jungler" class="laner-box jungler"></div>
+                <div id="midlaner" class="laner-box midlaner"></div>
+                <div id="adc" class="laner-box adc"></div>
+                <div id="support" class="laner-box support"></div>
             </div>
-            <div class="matchcontainer"> Match history goes here</div>
+            <div class="matchcontainer">
+                @foreach (Match match in team.Matches)
+                {
+                    <form id="matchForm-@match.Id" asp-action="MatchDetails" asp-controller="Home" method="post">
+                        @Html.Raw(Helpers.CreateMatchCard(match))
+                        <input type="hidden" id="matchId-@match.Id" name="id" value="@match.Id" />
+                    </form>
+                }
+            </div>
         </div>
         <div class="column">
-            List of owned players go here
+            @if (user is not null && team is not null && team.Players is not null)
+            {
+                @foreach (Player player in team.Players)
+                {
+                    <form id="playerForm-@player.Id" class="player-card" draggable="true" ondragstart="onDragStart(event)" asp-action="PlayerDetails" asp-controller="Home" method="post">
+                        @Html.Raw(Helpers.CreatePlayerCard(player, false))
+                        <input type="hidden" id="playerId-@player.Id" name="id" value="@player.Id" />
+                    </form>
+                }
+            }
         </div>
     </div>
 
 </body>
 </html>
-

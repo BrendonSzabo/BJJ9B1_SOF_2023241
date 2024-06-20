@@ -1,0 +1,195 @@
+﻿body {
+    font-family: 'Marcellus SC', serif;
+}
+
+.column {
+    float: left;
+    width: 33.33%; /* Each column takes up one-third of the container */
+    padding: 10px;
+    box-sizing: border-box; /* Ensures padding doesn't affect width */
+    height: 90vh;
+    border: 1px solid #ccc;
+    background-color: #f2f2f2;
+}
+
+/* Clear floats after columns */
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.imagecontainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 45%; /* Adjust height of container as needed */
+}
+
+    .imagecontainer img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+.matchcontainer {
+    height: 55%;
+}
+
+.header {
+    height: 8vh;
+}
+
+    .header::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+.headercolumn {
+    float: left;
+    width: 33.33%; /* Each column takes up one-third of the container */
+    height: 100%;
+    padding: 10px;
+    margin: 0px 0px 5px 0px;
+    box-sizing: border-box; /* Ensures padding doesn't affect width */
+    background-color: #f2f2f2;
+}
+
+.btn-link {
+    display: inline-block;
+    background-color: #007bff; /* Bootstrap primary color for button */
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    margin: 0px 5px 0px 5px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+    .btn-link:hover {
+        background-color: #0056b3; /* Darker shade for hover effect */
+        text-decoration: none;
+    }
+
+.matchCard {
+    display: flex;
+    height: 68px;
+    border: 1px solid #ccc;
+    background-color: #f2f2f2;
+}
+
+    .matchCard::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+.teamName {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    float: left;
+    width: 68px;
+    height: 68px;
+    padding: 10px;
+    box-sizing: border-box; /* Ensures padding doesn't affect width */
+    border: 1px solid #ccc;
+    background-color: cyan;
+}
+
+.matchScore {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    float: left;
+    width: 200px;
+    height: 100%;
+    padding: 0px;
+    box-sizing: border-box; /* Ensures padding doesn't affect width */
+    border: 1px solid #ccc;
+    background-color: white;
+}
+
+.playerCard {
+    height: 68px;
+    width: 100%;
+    border: 1px solid #ccc;
+    background-color: #f2f2f2;
+    cursor: move;
+}
+
+    .playerCard::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+.playerImgCol {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    float: left;
+    width: 68px; /* Each column takes up one-third of the container */
+    height: 68px;
+    padding: 10px;
+    box-sizing: border-box; /* Ensures padding doesn't affect width */
+    border: 1px solid #ccc;
+    background-color: cyan;
+}
+
+.playerStatCol {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    float: left;
+    width: 200px; /* Each column takes up one-third of the container */
+    height: 68px;
+    padding: 10px;
+    box-sizing: border-box; /* Ensures padding doesn't affect width */
+    border: 1px solid #ccc;
+    background-color: white;
+}
+
+.playerPrice{
+    color: pink;
+    font-size: 69px;
+}
+
+#map {
+    position: relative;
+    width: 860px;
+    height: auto;
+}
+
+.laner-box {
+    position: absolute;
+    border: 2px dashed #ffffff;
+    width: 100px;
+    height: 100px;
+    z-index: 1000;
+}
+
+.toplaner {
+    top: 50px;
+    left: 100px;
+}
+
+.jungler {
+    top: 150px;
+    left: 300px;
+}
+
+.midlaner {
+    top: 200px;
+    left: 500px;
+}
+
+.adc {
+    top: 400px;
+    left: 600px;
+}
+
+.support {
+    top: 500px;
+    left: 650px;
+}

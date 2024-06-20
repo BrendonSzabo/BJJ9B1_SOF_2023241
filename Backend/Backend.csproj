@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <Content Remove="Areas\Identity\Pages\Account\ExternalLogin.cshtml" />
+    <Content Remove="wwwroot\js\dash.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -41,6 +42,7 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\ExternalLogin.cshtml" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\dash.css" />
   </ItemGroup>
 
   <ItemGroup>
@@ -54,6 +56,7 @@
   <ItemGroup>
     <None Include="Areas\Identity\Pages\Account\ExternalLogin.cshtml" />
     <None Include="Properties\serviceDependencies.local.json.user" />
+    <None Include="wwwroot\js\dash.js" />
   </ItemGroup>
 
 </Project>

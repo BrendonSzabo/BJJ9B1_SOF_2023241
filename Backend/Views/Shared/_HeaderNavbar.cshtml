@@ -5,8 +5,15 @@
 @{
     var user = UserManager.GetUserAsync(User).Result;
 }
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Marcellus+SC" rel="stylesheet">
+</head>
 
 <style>
+    body{
+        font-family: 'Marcellus SC', serif;
+    }
+
     .header {
         height: 8vh;
     }
@@ -50,11 +57,14 @@
         <div class="headercolumn">
             Credits: @user.Credits
         </div>
-            <div class="headercolumn btn-link">
-                Profile @Html.ActionLink("Profile", "Profile", "Home", new { id = user.Id }, new { @class = "btn-link" })
+        <div class="headercolumn btn-link">
+            Profile @Html.ActionLink("Profile", "Profile", "Home", new { id = user.Id }, new { @class = "btn-link" })
         </div>
-            <div class="headercolumn btn-link">
-                Logout @Html.ActionLink("Logout", "Logout", "Account", null, new { @class = "btn-link" })
+        <div class="headercolumn btn-link">
+            Logout @Html.ActionLink("Logout", "Logout", "Account", null, new { @class = "btn-link" })
+        </div>
+        <div class="headercolumn btn-link">
+            Home @Html.ActionLink("Home", "Dashboard", "Home", null, new { @class = "btn-link" })
         </div>
     }
     else

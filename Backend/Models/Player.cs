@@ -13,6 +13,7 @@ namespace Backend.Models
         public string Name { get; set; }
         public string Image { get; set; }
         public int Rating { get; set; }
+        public int Price { get { return CalculatePrice(); } set { } }
         public RoleEnum Role { get; set; }
         public RegionEnum Region { get { return Team == null ? RegionEnum.NotInATeam : Team.Region; } set { } }
         public string Language { get; set; }
@@ -37,6 +38,58 @@ namespace Backend.Models
             Nationality = nationality;
             YearsAsPro = age;
             TeamId = teamId;
+        }
+
+        private int CalculatePrice()
+        {
+            int basePrice = 1000;
+
+            basePrice += Rating * 500;
+            basePrice += YearsAsPro * 200;
+
+            switch (Region)
+            {
+                case RegionEnum.LCS:
+                    basePrice += 1000;
+                    break;
+                case RegionEnum.LEC:
+                    basePrice += 1000;
+                    break;
+                case RegionEnum.LCK:
+                    basePrice += 2000;
+                    break;
+                case RegionEnum.LPL:
+                    basePrice += 2000;
+                    break;
+                case RegionEnum.PCS:
+                    basePrice += 900;
+                    break;
+                case RegionEnum.LCO:
+                    basePrice += 500;
+                    break;
+                case RegionEnum.CBLOL:
+                    basePrice += 500;
+                    break;
+                case RegionEnum.LJL:
+                    basePrice += 500;
+                    break;
+                case RegionEnum.LLA:
+                    basePrice += 500;
+                    break;
+                case RegionEnum.VCS:
+                    basePrice += 900;
+                    break;
+                default:
+                    basePrice += 0;
+                    break;
+            }
+
+            if (basePrice < 0)
+            {
+                basePrice = 0;
+            }
+
+            return basePrice;
         }
 
     }

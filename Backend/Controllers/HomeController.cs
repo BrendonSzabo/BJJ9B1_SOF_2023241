@@ -17,6 +17,7 @@ namespace Backend.Controllers
         private readonly UserManager<User> _userManager;
         private readonly ApplicationDbContext _context;
         private readonly HomeLogic _homeLogic;
+        private readonly ModelLogic<User> _userLogic;
 
         public HomeController(ILogger<HomeController> logger, ApplicationDbContext context, UserManager<User> userManager, IEmailSender emailSender, HomeLogic homeLogic)
         {
@@ -25,6 +26,30 @@ namespace Backend.Controllers
             _context = context;
             _userManager = userManager;
             _homeLogic = homeLogic;
+        }
+
+        [HttpPost]
+        public IActionResult MatchDetails(int id)
+        {
+            var match = _context.Matches.FirstOrDefault(m => m.Id == id);
+            if (match == null)
+            {
+                return Error("Match not found in database.");
+            }
+
+            return View(match);
+        }
+
+        [HttpPost]
+        public IActionResult PlayerDetails(int id)
+        {
+            var player = _context.Players.FirstOrDefault(m => m.Id == id);
+            if (player == null)
+            {
+                return Error("Player not found in database.");
+            }
+
+            return View(player);
         }
 
         //public async Task<IActionResult> Index()
@@ -44,6 +69,23 @@ namespace Backend.Controllers
 
         public IActionResult Index()
         {
+            return View();
+        }
+
+        public IActionResult Dashboard()
+        {
+            var user = _userManager.GetUserAsync(User).Result;
+            ViewBag.User = user;
+            ViewBag.Team = user.Team;
+            List<Player> shopPlayers = new List<Player>();
+            foreach (var player in _context.Players)
+            {
+                if (user.Team.Players.FirstOrDefault(x => x.Id == player.Id) == null)
+                {
+                    shopPlayers.Add(player);
+                }
+            }
+            ViewBag.ShopPlayers = shopPlayers;
             return View();
         }
 
@@ -138,6 +180,13 @@ namespace Backend.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error(string errorMessage)
+        {
+            ViewBag.ErrorMessage = errorMessage;
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }

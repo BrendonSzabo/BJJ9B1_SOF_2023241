@@ -1,0 +1,33 @@
+﻿@model Player
+@{
+    var player = Model as Player;
+}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/playerStyle.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Marcellus+SC" rel="stylesheet">
+</head>
+<body>
+    <header>
+        @await Html.PartialAsync("_HeaderNavbar")
+    </header>
+    <div class="row">
+        <div class="imageColumn">
+            <img src="@player.Image" alt="Player Image" />
+        </div>
+        <div class="statsColumn">
+            <span>@player.Name</span>
+            <ul>
+                <li>Rating: @player.Rating</li>
+                <li>Price: @player.Price</li>
+                <li>Role: @player.Role</li>
+                <li>Region: @player.Region</li>
+                <li>Nationality: @player.Nationality</li>
+                <li>Language: @player.Language</li>
+                <li>Years as Pro: @player.YearsAsPro</li>
+            </ul>
+        </div>
+    </div>
+</body>

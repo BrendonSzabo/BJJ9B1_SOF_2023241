@@ -10,6 +10,9 @@ namespace Backend.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string? ContentType { get; set; }
+        /// <summary>
+        /// The profile image of the user.
+        /// </summary>
         public byte[]? Data { get; set; }
         public int Credits { get; set; }
         public int TeamId { get; set; }

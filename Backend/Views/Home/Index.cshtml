@@ -6,100 +6,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="~/css/main.css" asp-append-version="true" />
-    <script src="~/js/playerShop.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Marcellus+SC" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTTP Grid</title>
+    <title>Legends of Fantasy</title>
 </head>
-<body class="body">
-    <div class="row">
-        <div class="column">
-            <div class="header">
-                <h2>Header</h2>
-            </div>
-            <div id="playerShopInitializer" class="player-container">
-                @foreach (var player in Model.Item1)
-                {
-                    <div class="button-body">
-                        @* <label class="labl"> *@
-                        <input type="radio" name="shopPlayer" value="@player" checked>
-                        <div class="listbutton-main">
-                            <div class="listbutton-column">
-                                <div class="listbutton-icon">
-                                    <img src="@player.Image" class="profile-image" />
-                                </div>
-                            </div>
-                            <div class="listbutton-column-text">
-                                <div class="listbutton-text">@player.Name</div>
-                                <div class="listbutton-text">@player.Role</div>
-                            </div>
-                            <div class="listbutton-column">
-                                <div class="listbutton-text">@player.Rating</div>
-                            </div>
-                        </div>
-                        @* </label> *@
-                    </div>
-                }
-            </div>
+<body>
+    <header>
+        @await Html.PartialAsync("_HeaderNavbar")
+    </header>
+    <div class="container">
+        <div>
+            <span class="main-text">Welcome to Legends of Fantasy</span>
         </div>
-        <div class="column">
-            <div class="button-body">
-                <button>
-                    <div class="listbutton-main">
-                        <div class="listbutton-colum">
-                            <div class="listbutton-icon"></div>
-                        </div>
-                        <div class="listbutton-column">
-                            <div class="listbutton-text">Title</div>
-                            <div class="listbutton-text">Secondary Text</div>
-                        </div>
-                    </div>
-                </button>
-            </div>
-            <div class="button-body">
-                <button>
-                    <div class="listbutton-main">
-                        <div class="listbutton-colum">
-                            <div class="listbutton-icon"></div>
-                        </div>
-                        <div class="listbutton-column">
-                            <div class="listbutton-text">Title</div>
-                            <div class="listbutton-text">Secondary Text</div>
-                        </div>
-                    </div>
-                </button>
-            </div>
+        <div class="subtext">
+            <span>A league of Legends team builder game</span>
         </div>
-        <div class="column">
-            <div class="header">
-                <h2>Header</h2>
-            </div>
-            <div id="ownTeamInitializer" class="player-container">
-                @foreach (var player in Model.Item2.Team.Players)
-                {
-                    <div class="button-body">
-                        @* <label class="labl"> *@
-                        <input type="radio" name="shopPlayer" value="@player" checked>
-                        <div class="listbutton-main">
-                            <div class="listbutton-column">
-                                <div class="listbutton-icon">
-                                    <img src="@player.Image" class="profile-image" />
-                                </div>
-                            </div>
-                            <div class="listbutton-column-text">
-                                <div class="listbutton-text">@player.Name</div>
-                                <div class="listbutton-text">@player.Role</div>
-                            </div>
-                            <div class="listbutton-column">
-                                <div class="listbutton-text">@player.Rating</div>
-                            </div>
-                        </div>
-                        @* </label> *@
-                    </div>
-                }
-            </div>
+        <div class="buttons">
+            <form asp-area="Identity" asp-page="/Account/Login" method="post">
+                <input type="submit" value="Login" />
+            </form>
+            <form asp-area="Identity" asp-page="/Account/Register" method="post">
+                <input type="submit" value="Register" />
+            </form>
         </div>
     </div>
 </body>
