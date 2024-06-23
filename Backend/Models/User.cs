@@ -7,8 +7,6 @@ namespace Backend.Models
 {
     public class User : IdentityUser, IModelBase
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
         public string? ContentType { get; set; }
         /// <summary>
         /// The profile image of the user.
@@ -23,13 +21,6 @@ namespace Backend.Models
 
         public User()
         {
-            Credits = 0;
-            Team = new Team();
-        }
-
-        public User(string userName) : base(userName)
-        {
-            Credits = 0;
             Team = new Team();
         }
 

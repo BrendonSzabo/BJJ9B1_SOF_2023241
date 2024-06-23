@@ -82,15 +82,8 @@ namespace Backend.Areas.Identity.Pages.Account
         {
             [Required]
             [StringLength(100)]
-            [Display(Name = "First Name")]
-            public string FirstName { get; set; }
-
-            [Required]
-            [StringLength(100)]
-            [Display(Name = "Last Name")]
-            public string LastName { get; set; }
-
-
+            [Display(Name = "Username")]
+            public string UserName { get; set; }
 
             [Required]
             [EmailAddress]
@@ -128,9 +121,7 @@ namespace Backend.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
-                user.FirstName = Input.FirstName;
-                user.LastName = Input.LastName;
-
+                user.UserName = Input.UserName;
                 if (Input.File != null)
                 {
                     user.ContentType = Input.File.ContentType;
@@ -153,7 +144,7 @@ namespace Backend.Areas.Identity.Pages.Account
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
-
+                Console.WriteLine(result);
                 if (_db.Users.ToList().Count == 1)
                 {
                     var role = new IdentityRole()
@@ -165,11 +156,11 @@ namespace Backend.Areas.Identity.Pages.Account
                         await _roleManager.CreateAsync(role);
                     }
                     await _userManager.AddToRoleAsync(user, "Admin");
+                    Console.WriteLine("added admin");
                 }
 
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

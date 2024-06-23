@@ -4,7 +4,6 @@ using Backend.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using System.Diagnostics;
 
@@ -91,10 +90,29 @@ namespace Backend.Controllers
 
         public IActionResult Profile()
         {
-            var user = _userManager.GetUserAsync(User).Result;
-            ViewBag.User = user;
-            return View();
+            try
+            {
+                var user = _userManager.GetUserAsync(User).Result;
+                if (user == null)
+                {
+                    Console.WriteLine("User not found");
+                    // Handle the case where the user is not found, e.g., redirect to an error page
+                }
+                else {
+                    Console.WriteLine("User found");
+                }
+                ViewBag.User = user;
+                Console.WriteLine("Profile controller called");
+                return View("ProfilePage");  // Explicitly specify the view name
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception: {ex.Message}");
+                // Handle the exception, e.g., log it and return an error view
+                return View("Error");
+            }
         }
+
 
         [Authorize(Roles = "Admin")]
         public IActionResult Users()

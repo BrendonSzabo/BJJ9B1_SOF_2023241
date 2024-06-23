@@ -38,13 +38,14 @@
     height: 800px;
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 10% 10% 10% 10% 10% 25% 10% 10%;
+    grid-template-rows: 10% 10% 10% 10% 10% 10% 25% 10% 10%;
     gap: 0px 0px;
     grid-auto-flow: row;
     grid-template-areas:
         "."
         "titleArea"
         "nameArea"
+        "emailArea"
         "pwdArea"
         "pwd2Area"
         "warningArea"
@@ -71,6 +72,13 @@
 
 .nameArea {
     grid-area: nameArea;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.emailArea {
+    grid-area: emailArea;
     justify-content: center;
     align-items: center;
     display: flex;

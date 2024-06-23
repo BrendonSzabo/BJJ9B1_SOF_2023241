@@ -1,75 +1,9 @@
 ﻿body {
     font-family: 'Marcellus SC', serif;
+    background-image: url('https://admin.esports.gg/wp-content/uploads/2024/01/Riot-Games-Arena-Stage-1-968x544.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
-
-.column {
-    float: left;
-    width: 33.33%; /* Each column takes up one-third of the container */
-    padding: 10px;
-    box-sizing: border-box; /* Ensures padding doesn't affect width */
-    height: 90vh;
-    border: 1px solid #ccc;
-    background-color: #f2f2f2;
-}
-
-/* Clear floats after columns */
-.row::after {
-    content: "";
-    clear: both;
-    display: table;
-}
-
-.imagecontainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 45%; /* Adjust height of container as needed */
-}
-
-    .imagecontainer img {
-        max-width: 100%;
-        max-height: 100%;
-    }
-
-.matchcontainer {
-    height: 55%;
-}
-
-.header {
-    height: 8vh;
-}
-
-    .header::after {
-        content: "";
-        clear: both;
-        display: table;
-    }
-
-.headercolumn {
-    float: left;
-    width: 33.33%; /* Each column takes up one-third of the container */
-    height: 100%;
-    padding: 10px;
-    margin: 0px 0px 5px 0px;
-    box-sizing: border-box; /* Ensures padding doesn't affect width */
-    background-color: #f2f2f2;
-}
-
-.btn-link {
-    display: inline-block;
-    background-color: #007bff; /* Bootstrap primary color for button */
-    color: #fff;
-    text-decoration: none;
-    padding: 10px 20px;
-    margin: 0px 5px 0px 5px;
-    border-radius: 5px;
-    text-align: center;
-}
-
-    .btn-link:hover {
-        background-color: #0056b3; /* Darker shade for hover effect */
-        text-decoration: none;
-    }
 
 .matchCard {
     display: flex;
@@ -89,12 +23,12 @@
     justify-content: center;
     align-items: center;
     float: left;
-    width: 68px;
+    width: 20%;
     height: 68px;
     padding: 10px;
     box-sizing: border-box; /* Ensures padding doesn't affect width */
     border: 1px solid #ccc;
-    background-color: cyan;
+    background-color: #f2f2f2;
 }
 
 .matchScore {
@@ -102,12 +36,13 @@
     justify-content: center;
     align-items: center;
     float: left;
-    width: 200px;
+    width: 60%;
     height: 100%;
     padding: 0px;
     box-sizing: border-box; /* Ensures padding doesn't affect width */
     border: 1px solid #ccc;
     background-color: white;
+    font-size: 24px;
 }
 
 .playerCard {
@@ -116,12 +51,14 @@
     border: 1px solid #ccc;
     background-color: #f2f2f2;
     cursor: move;
+    margin: 0px;
 }
 
     .playerCard::after {
         content: "";
         clear: both;
         display: table;
+        margin: 0px;
     }
 
 .playerImgCol {
@@ -129,25 +66,32 @@
     justify-content: center;
     align-items: center;
     float: left;
-    width: 68px; /* Each column takes up one-third of the container */
+    width: 20%; /* Each column takes up one-third of the container */
     height: 68px;
     padding: 10px;
     box-sizing: border-box; /* Ensures padding doesn't affect width */
     border: 1px solid #ccc;
-    background-color: cyan;
+    margin: 0px;
 }
+
+    .playerImgCol img {
+        max-width: 100%;
+        max-height: 100%;
+        margin: 0px;
+    }
 
 .playerStatCol {
     display: flex;
     justify-content: center;
     align-items: center;
     float: left;
-    width: 200px; /* Each column takes up one-third of the container */
+    width: 60%; /* Each column takes up one-third of the container */
     height: 68px;
     padding: 10px;
     box-sizing: border-box; /* Ensures padding doesn't affect width */
     border: 1px solid #ccc;
     background-color: white;
+    margin: 0px;
 }
 
 .playerPrice{
@@ -155,41 +99,97 @@
     font-size: 69px;
 }
 
-#map {
-    position: relative;
-    width: 860px;
-    height: auto;
+.containerDash {
+    height: 80vh;
+    
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "playerStoreArea mainArea ownPlayersArea";
 }
 
-.laner-box {
-    position: absolute;
-    border: 2px dashed #ffffff;
-    width: 100px;
-    height: 100px;
-    z-index: 1000;
+.playerStoreArea {
+    
+    grid-area: playerStoreArea;
 }
 
-.toplaner {
-    top: 50px;
-    left: 100px;
+.ownPlayersArea {
+    
+    grid-area: ownPlayersArea;
 }
 
-.jungler {
-    top: 150px;
-    left: 300px;
+.mainArea {
+    
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "mapArea"
+        "matchesArea";
+    grid-area: mainArea;
 }
 
-.midlaner {
-    top: 200px;
-    left: 500px;
+.mapArea {
+    
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "topArea . ."
+        "jgArea midArea ."
+        ". supArea adcArea";
+    grid-area: mapArea;
+    background-image: url('https://www.hotspawn.com/app/uploads/2020/03/summoners-rift.jpg');
 }
 
-.adc {
-    top: 400px;
-    left: 600px;
+.midArea {
+    
+    grid-area: midArea;
+    display: grid;
+    justify-content: center;
+    align-items: center;
 }
 
-.support {
-    top: 500px;
-    left: 650px;
+.topArea {
+    
+    grid-area: topArea;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.adcArea {
+    
+    grid-area: adcArea;
+    display: grid;
+    justify-content: start;
+    align-items: end;
+}
+
+.supArea {
+    
+    grid-area: supArea;
+    display: grid;
+    justify-content: center;
+    align-items: end;
+}
+
+.jgArea {
+    
+    grid-area: jgArea;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.matchesArea {
+    
+    grid-area: matchesArea;
 }

@@ -17,9 +17,9 @@
             window.location.href = '@errorUrl';
         </script>
     }
-    var user = ViewBag.User;
-    var team = ViewBag.Team;
-    var shopPlayers = ViewBag.ShopPlayers;
+    var user = ViewBag.User as User;
+    var team = ViewBag.Team as Team;
+    var shopPlayers = ViewBag.ShopPlayers as List<Player>;
 }
 
 <html lang="en">
@@ -31,40 +31,56 @@
     <link href="https://fonts.googleapis.com/css?family=Marcellus+SC" rel="stylesheet">
 </head>
 <body>
-    <header>
-        @await Html.PartialAsync("_HeaderNavbar")
-    </header>
-    <div class="row">
-        <div class="column">
-            @foreach (Player player in shopPlayers)
+    <div class="containerDash">
+        <div class="playerStoreArea">
+            @if (shopPlayers is not null && shopPlayers.Count() is not 0)
             {
-                <form id="playerForm-@player.Id" asp-action="PlayerDetails" asp-controller="Home" method="post">
-                    @Html.Raw(Helpers.CreatePlayerCard(player, true))
-                    <input type="hidden" id="matchId-@player.Id" name="id" value="@player.Id" />
-                </form>
-            }
-        </div>
-        <div class="column">
-            <div class="imagecontainer" id="map">
-                <img src="https://imgs.search.brave.com/7acQSbau71tA1h-TNqEcySXOWaIbge6zpqNea4a8MTA/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9wcm9k/LmFzc2V0cy5lYXJs/eWdhbWVjZG4uY29t/L2ltYWdlcy9TdW1t/b25lci1SaWZ0LU1h/cC5wbmc_dHJhbnNm/b3JtPWFydGljbGVf/d2VicA" alt="Map Image">
-                <div id="toplaner" class="laner-box toplaner"></div>
-                <div id="jungler" class="laner-box jungler"></div>
-                <div id="midlaner" class="laner-box midlaner"></div>
-                <div id="adc" class="laner-box adc"></div>
-                <div id="support" class="laner-box support"></div>
-            </div>
-            <div class="matchcontainer">
-                @foreach (Match match in team.Matches)
+                @foreach (Player player in shopPlayers)
                 {
-                    <form id="matchForm-@match.Id" asp-action="MatchDetails" asp-controller="Home" method="post">
-                        @Html.Raw(Helpers.CreateMatchCard(match))
-                        <input type="hidden" id="matchId-@match.Id" name="id" value="@match.Id" />
+                    <form id="playerForm-@player.Id" asp-action="PlayerDetails" asp-controller="Home" method="post">
+                        @Html.Raw(Helpers.CreatePlayerCard(player, true))
+                        <input type="hidden" id="matchId-@player.Id" name="id" value="@player.Id" />
                     </form>
                 }
-            </div>
+            }
+            else
+            {
+                <div class='playerCard' data-player-id='{player.Id}' ondblclick='submitPlayerForm(this)'>
+                    <div class='playerImgCol'><img src="https://i0.wp.com/seds.org/wp-content/uploads/2020/03/placeholder.png?fit=1200%2C800&ssl=1" /></div>
+                    <div class='playerStatCol'>
+                        <div>placeholder, placeholder</div>
+                        <div>placeholder</div>
+                    </div>
+                    <div class='playerImgCol'>100</div>
+                </div>
+                <div class='playerCard' data-player-id='{player.Id}' ondblclick='submitPlayerForm(this)'>
+                    <div class='playerImgCol'><img src="https://i0.wp.com/seds.org/wp-content/uploads/2020/03/placeholder.png?fit=1200%2C800&ssl=1" /></div>
+                    <div class='playerStatCol'>
+                        <div>placeholder, placeholder</div>
+                        <div>placeholder</div>
+                    </div>
+                    <div class='playerImgCol'>100</div>
+                </div>
+                <div class='playerCard' data-player-id='{player.Id}' ondblclick='submitPlayerForm(this)'>
+                    <div class='playerImgCol'><img src="https://i0.wp.com/seds.org/wp-content/uploads/2020/03/placeholder.png?fit=1200%2C800&ssl=1" /></div>
+                    <div class='playerStatCol'>
+                        <div>placeholder, placeholder</div>
+                        <div>placeholder</div>
+                    </div>
+                    <div class='playerImgCol'>100</div>
+                </div>
+                <div class='playerCard' data-player-id='{player.Id}' ondblclick='submitPlayerForm(this)'>
+                    <div class='playerImgCol'><img src="https://i0.wp.com/seds.org/wp-content/uploads/2020/03/placeholder.png?fit=1200%2C800&ssl=1" /></div>
+                    <div class='playerStatCol'>
+                        <div>placeholder, placeholder</div>
+                        <div>placeholder</div>
+                    </div>
+                    <div class='playerImgCol'>100</div>
+                </div>
+            }
         </div>
-        <div class="column">
-            @if (user is not null && team is not null && team.Players is not null)
+        <div class="ownPlayersArea">
+            @if (user is not null && team is not null && team.Players is not null && team.Players.Count() is not 0)
             {
                 @foreach (Player player in team.Players)
                 {
@@ -74,8 +90,105 @@
                     </form>
                 }
             }
+            else
+            {
+                <div class='playerCard' data-player-id='{player.Id}' ondblclick='submitPlayerForm(this)'>
+                    <div class='playerImgCol'><img src="https://i0.wp.com/seds.org/wp-content/uploads/2020/03/placeholder.png?fit=1200%2C800&ssl=1" /></div>
+                    <div class='playerStatCol'>
+                        <div>placeholder, placeholder</div>
+                        <div>placeholder</div>
+                    </div>
+                    <div class='playerImgCol'>100</div>
+                </div>
+                <div class='playerCard' data-player-id='{player.Id}' ondblclick='submitPlayerForm(this)'>
+                    <div class='playerImgCol'><img src="https://i0.wp.com/seds.org/wp-content/uploads/2020/03/placeholder.png?fit=1200%2C800&ssl=1" /></div>
+                    <div class='playerStatCol'>
+                        <div>placeholder, placeholder</div>
+                        <div>placeholder</div>
+                    </div>
+                    <div class='playerImgCol'>100</div>
+                </div>
+                <div class='playerCard' data-player-id='{player.Id}' ondblclick='submitPlayerForm(this)'>
+                    <div class='playerImgCol'><img src="https://i0.wp.com/seds.org/wp-content/uploads/2020/03/placeholder.png?fit=1200%2C800&ssl=1" /></div>
+                    <div class='playerStatCol'>
+                        <div>placeholder, placeholder</div>
+                        <div>placeholder</div>
+                    </div>
+                    <div class='playerImgCol'>100</div>
+                </div>
+                <div class='playerCard' data-player-id='{player.Id}' ondblclick='submitPlayerForm(this)'>
+                    <div class='playerImgCol'><img src="https://i0.wp.com/seds.org/wp-content/uploads/2020/03/placeholder.png?fit=1200%2C800&ssl=1"/></div>
+                    <div class='playerStatCol'>
+                        <div>placeholder, placeholder</div>
+                        <div>placeholder</div>
+                    </div>
+                    <div class='playerImgCol'>100</div>
+                </div>
+            }
+        </div>
+        <div class="mainArea">
+            <div class="mapArea">
+                @if (team is not null && team.Players is not null && team.Players.Count() is not 0)
+                {
+                    <div class="midArea"><img src="@team.Players.First(x => x.Id == team.MidId).Image" alt="mid" style="width:50px;height:50px;"></img></div>
+                    <div class="topArea"><img src="@team.Players.First(x => x.Id == team.TopId).Image" alt="top" style="width:50px;height:50px;"></img></div>
+                    <div class="adcArea"><img src="@team.Players.First(x => x.Id == team.ADCId).Image" alt="adc" style="width:50px;height:50px;"></img></div>
+                    <div class="supArea"><img src="@team.Players.First(x => x.Id == team.SupportId).Image" alt="sup" style="width:50px;height:50px;"></img></div>
+                    <div class="jgArea"><img src="@team.Players.First(x => x.Id == team.JungleId).Image" alt="jng" style="width:50px;height:50px;"></img></div>
+                }
+                else
+                {
+                    <div class="midArea"><img src="https://i0.wp.com/seds.org/wp-content/uploads/2020/03/placeholder.png?fit=1200%2C800&ssl=1" alt="mid" style="width:50px;height:50px;"></img></div>
+                    <div class="topArea"><img src="https://i0.wp.com/seds.org/wp-content/uploads/2020/03/placeholder.png?fit=1200%2C800&ssl=1" alt="top" style="width:50px;height:50px;"></img></div>
+                    <div class="adcArea"><img src="https://i0.wp.com/seds.org/wp-content/uploads/2020/03/placeholder.png?fit=1200%2C800&ssl=1" alt="adc" style="width:50px;height:50px;"></img></div>
+                    <div class="supArea"><img src="https://i0.wp.com/seds.org/wp-content/uploads/2020/03/placeholder.png?fit=1200%2C800&ssl=1" alt="sup" style="width:50px;height:50px;"></img></div>
+                    <div class="jgArea"><img src="https://i0.wp.com/seds.org/wp-content/uploads/2020/03/placeholder.png?fit=1200%2C800&ssl=1" alt="jng" style="width:50px;height:50px;"></img></div>
+                }
+            </div>
+            <div class="matchesArea">
+                @if (team.Matches.Count() is not 0)
+                {
+                    @foreach (Match match in team.Matches)
+                    {
+                        <form id="matchForm-@match.Id" asp-action="MatchDetails" asp-controller="Home" method="post">
+                            @Html.Raw(Helpers.CreateMatchCard(match))
+                            <input type="hidden" id="matchId-@match.Id" name="id" value="@match.Id" />
+                        </form>
+                    }
+                }
+                else
+                {
+                    <div class='matchCard' data-match-id='{match.Id}' ondblclick='submitMatchForm(this)'>
+                        <div class='teamName'>placeholderMatch</div>
+                        <div class='matchScore'>
+                            <div>3 ----- 3</div>
+                        </div>
+                        <div class='teamName'>placeholderMatch</div>
+                    </div>
+                    <div class='matchCard' data-match-id='{match.Id}' ondblclick='submitMatchForm(this)'>
+                        <div class='teamName'>placeholderMatch</div>
+                        <div class='matchScore'>
+                            <div>3 ----- 3</div>
+                        </div>
+                        <div class='teamName'>placeholderMatch</div>
+                    </div>
+                    <div class='matchCard' data-match-id='{match.Id}' ondblclick='submitMatchForm(this)'>
+                        <div class='teamName'>placeholderMatch</div>
+                        <div class='matchScore'>
+                            <div>3 ----- 3</div>
+                        </div>
+                        <div class='teamName'>placeholderMatch</div>
+                    </div>
+                    <div class='matchCard' data-match-id='{match.Id}' ondblclick='submitMatchForm(this)'>
+                        <div class='teamName'>placeholderMatch</div>
+                        <div class='matchScore'>
+                            <div>3 ----- 3</div>
+                        </div>
+                        <div class='teamName'>placeholderMatch</div>
+                    </div>
+                }
+            </div>
         </div>
     </div>
-
 </body>
 </html>

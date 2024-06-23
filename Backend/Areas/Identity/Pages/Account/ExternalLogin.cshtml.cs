@@ -109,11 +109,7 @@ namespace Backend.Areas.Identity.Pages.Account
 
             [Required]
             [StringLength(100)]
-            public string FirstName { get; set; }
-
-            [Required]
-            [StringLength(100)]
-            public string LastName { get; set; }
+            public string UserName { get; set; }
 
             public string PictureUrl { get; set; }
 
@@ -182,16 +178,8 @@ namespace Backend.Areas.Identity.Pages.Account
                     Input = new InputModel
                     {
                         Email = info.Principal.FindFirstValue(ClaimTypes.Email),
-                        FirstName = info.Principal.FindFirstValue(ClaimTypes.Surname),
-                        LastName = info.Principal.FindFirstValue(ClaimTypes.GivenName)
+                        UserName = Input.UserName
                     };
-                    if (Input.FirstName == null)
-                    {
-                        var name = info.Principal.FindFirstValue(ClaimTypes.Name);
-                        string[] names = name.Split(' ');
-                        Input.FirstName = names[1];
-                        Input.LastName = names[0];
-                    }
 
                     if (info.ProviderDisplayName == "Facebook")
                     {
@@ -239,8 +227,7 @@ namespace Backend.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
-                user.FirstName = Input.FirstName;
-                user.LastName = Input.LastName;
+                user.UserName = Input.UserName;
 
                 //Facebook picture download
                 if (info.ProviderDisplayName == "Facebook")

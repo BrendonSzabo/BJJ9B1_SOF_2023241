@@ -85,13 +85,15 @@
 
 <body>
     <div class="containerMain">
-        <form method="post" class="loginContainer">
+        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="loginContainer">
             <div class="titleArea">
                 Register
             </div>
             <div class="nameArea">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <input asp-for="Input.Email" class="textInput" autocomplete="username" aria-required="true" placeholder="Email" />
+                <input asp-for="Input.UserName" class="textInput" autocomplete="username" aria-required="true" placeholder="Username" />
+            </div>
+            <div class="emailArea">
+                <input asp-for="Input.Email" class="textInput" autocomplete="email" aria-required="true" placeholder="Email" />
             </div>
             <div class="pwdArea">
                 <input asp-for="Input.Password" class="textInput" autocomplete="current-password" aria-required="true" placeholder="Password" />
@@ -100,6 +102,7 @@
                 <input asp-for="Input.ConfirmPassword" class="textInput" autocomplete="new-password" aria-required="true" placeholder="Confirm Password" />
             </div>
             <div class="warningArea">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
