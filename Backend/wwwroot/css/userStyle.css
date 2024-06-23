@@ -1,0 +1,68 @@
+﻿html {
+    background: -webkit-image-set( url("https://www.dexerto.com/cdn-image/wp-content/uploads/2024/06/19/LoL-Hall-of-legends-event-pass-e1718762739612.jpeg?width=640&amp;quality=100&amp;format=auto") 1x, url("https://www.dexerto.com/cdn-image/wp-content/uploads/2024/06/19/LoL-Hall-of-legends-event-pass-e1718762739612.jpeg?width=750&amp;quality=100&amp;format=auto") 2x, url("https://www.dexerto.com/cdn-image/wp-content/uploads/2024/06/19/LoL-Hall-of-legends-event-pass-e1718762739612.jpeg?width=828&amp;quality=100&amp;format=auto") 3x, url("https://www.dexerto.com/cdn-image/wp-content/uploads/2024/06/19/LoL-Hall-of-legends-event-pass-e1718762739612.jpeg?width=1080&amp;quality=100&amp;format=auto") 4x, url("https://www.dexerto.com/cdn-image/wp-content/uploads/2024/06/19/LoL-Hall-of-legends-event-pass-e1718762739612.jpeg?width=1200&amp;quality=100&amp;format=auto") 5x, url("https://www.dexerto.com/cdn-image/wp-content/uploads/2024/06/19/LoL-Hall-of-legends-event-pass-e1718762739612.jpeg?width=1920&amp;quality=100&amp;format=auto") 6x, url("https://www.dexerto.com/cdn-image/wp-content/uploads/2024/06/19/LoL-Hall-of-legends-event-pass-e1718762739612.jpeg?width=2048&amp;quality=100&amp;format=auto") 7x, url("https://www.dexerto.com/cdn-image/wp-content/uploads/2024/06/19/LoL-Hall-of-legends-event-pass-e1718762739612.jpeg?width=3840&amp;quality=100&amp;format=auto") 8x );
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Marcellus SC', serif;
+}
+
+.imageColumn {
+    float: left;
+    width: 256px; /* Each column takes up one-third of the container */
+    height: 256px;
+    padding: 10px;
+    box-sizing: border-box; /* Ensures padding doesn't affect width */
+    border: 1px solid #ccc;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.statsColumn {
+    float: left;
+    width: 60%; /* Each column takes up one-third of the container */
+    padding: 10px;
+    box-sizing: border-box; /* Ensures padding doesn't affect width */
+    height: 256px;
+    border: 1px solid #ccc;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Clear floats after columns */
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.row {
+    background: transparent;
+    width: 1024px;
+}
+
+img {
+    height: 100%;
+    width: 100%;
+}
+
+.credits {
+    font-size: 24px;
+}
+
+    .credits span {
+        color: gold;
+    }
+
+.name {
+    font-size: 24px;
+}
+
+.misc {
+    font-size: 24px;
+}
+
+    .misc span {
+        font-size: 20px;
+    }

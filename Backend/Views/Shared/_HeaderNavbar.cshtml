@@ -7,74 +7,35 @@
 }
 <head>
     <link href="https://fonts.googleapis.com/css?family=Marcellus+SC" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/navbar.css" />
 </head>
 
-<style>
-    body{
-        font-family: 'Marcellus SC', serif;
-    }
-
-    .header {
-        height: 8vh;
-    }
-
-        .header::after {
-            content: "";
-            clear: both;
-            display: table;
+<body>
+    <div class="header">
+        @{if (SignInManager.IsSignedIn(User))
+        {
+            <div class="headercolumn">
+                Credits: @user.Credits
+            </div>
+            <div class="headercolumn btn-link">
+                Profile @Html.ActionLink("Profile", "Profile", "Home", new { id = user.Id }, new { @class = "btn-link" })
+            </div>
+            <div class="headercolumn btn-link">
+                Logout @Html.ActionLink("Logout", "Logout", "Account", null, new { @class = "btn-link" })
+            </div>
+            <div class="headercolumn btn-link">
+                Home @Html.ActionLink("Home", "Dashboard", "Home", null, new { @class = "btn-link" })
+            </div>
         }
-
-    .headercolumn {
-        float: left;
-        width: 33.33%; /* Each column takes up one-third of the container */
-        height: 100%;
-        padding: 10px;
-        margin: 0px 0px 5px 0px;
-        box-sizing: border-box; /* Ensures padding doesn't affect width */
-        background-color: #f2f2f2;
-    }
-
-    .btn-link {
-        display: inline-block;
-        background-color: #007bff; /* Bootstrap primary color for button */
-        color: #fff;
-        text-decoration: none;
-        padding: 10px 20px;
-        margin: 0px 5px 0px 5px;
-        border-radius: 5px;
-        text-align: center;
-    }
-
-        .btn-link:hover {
-            background-color: #0056b3; /* Darker shade for hover effect */
-            text-decoration: none;
-        }
-</style>
-
-<div class="header">
-    @{if (SignInManager.IsSignedIn(User))
-    {
-        <div class="headercolumn">
-            Credits: @user.Credits
-        </div>
-        <div class="headercolumn btn-link">
-            Profile @Html.ActionLink("Profile", "Profile", "Home", new { id = user.Id }, new { @class = "btn-link" })
-        </div>
-        <div class="headercolumn btn-link">
-            Logout @Html.ActionLink("Logout", "Logout", "Account", null, new { @class = "btn-link" })
-        </div>
-        <div class="headercolumn btn-link">
-            Home @Html.ActionLink("Home", "Dashboard", "Home", null, new { @class = "btn-link" })
-        </div>
-    }
-    else
-    {
-        <div class="headercolumn"></div>
-        <div class="headercolumn btn-link">
-                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
-        </div>
-        <div class="headercolumn btn-link">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
-        </div>
-    }}
-</div>
+        else
+        {
+            <div class="headercolumn"></div>
+            <div class="headercolumn btn-link">
+                    <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+            </div>
+            <div class="headercolumn btn-link">
+                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+            </div>
+        }}
+    </div>
+</body>

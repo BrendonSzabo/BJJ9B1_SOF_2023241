@@ -89,6 +89,13 @@ namespace Backend.Controllers
             return View();
         }
 
+        public IActionResult Profile()
+        {
+            var user = _userManager.GetUserAsync(User).Result;
+            ViewBag.User = user;
+            return View();
+        }
+
         [Authorize(Roles = "Admin")]
         public IActionResult Users()
         {

@@ -37,27 +37,13 @@ namespace Backend.Areas.Identity.Pages.Account
 
 
         public RegisterModel(
-            UserManager<User> userManager,
-            IUserStore<User> userStore,
-            SignInManager<User> signInManager,
-            ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
-        {
-            _userManager = userManager;
-            _userStore = userStore;
-            _emailStore = GetEmailStore();
-            _signInManager = signInManager;
-            _logger = logger;
-            _emailSender = emailSender;
-        }
-        public RegisterModel(
-            UserManager<User> userManager,
-            IUserStore<User> userStore,
-            SignInManager<User> signInManager,
-            ILogger<RegisterModel> logger,
-            IEmailSender emailSender,
-            RoleManager<IdentityRole> roleManager,
-            ApplicationDbContext db)
+        UserManager<User> userManager,
+        IUserStore<User> userStore,
+        SignInManager<User> signInManager,
+        ILogger<RegisterModel> logger,
+        IEmailSender emailSender,
+        RoleManager<IdentityRole> roleManager = null,
+        ApplicationDbContext db = null)
         {
             _userManager = userManager;
             _userStore = userStore;

@@ -1,0 +1,32 @@
+﻿@{
+    var user = ViewBag.User as User;
+    string user64Img = Convert.ToBase64String(user.Data);
+    string userImgSrc = String.Format("data:image/png;base64,{0}", user64Img);
+}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/userStyle.css" />
+    <link href="https://fonts.googleapis.com/css?family=Marcellus+SC" rel="stylesheet">
+</head>
+<body>
+    <header>
+        @await Html.PartialAsync("_HeaderNavbar")
+    </header>
+    <div class="row">
+        <div class="imageColumn">
+            <img src="@userImgSrc" alt="Profile picture" />
+        </div>
+        <div class="statsColumn">
+            <span class="name">@user.FirstName @user.LastName</span>
+            <ul>
+                <li class="credits">Credits: <span>@user.Credits</span></li>
+                <li class="misc"><span>Rating: @user.Rating</span></li>
+                <li class="misc"><span>Wins: @user.Team.Wins</span></li>
+                <li class="misc"><span>Losses: @user.Team.Losses</span></li>
+                <li class="misc"><span>Team Rating: @user.Team.Rating</span></li>
+                <li class="misc"><span>Team Region: @user.Team.Region</span></li>
+            </ul>
+        </div>
+    </div>
+</body>

@@ -22,6 +22,7 @@ namespace Backend.Models
         public int? MidId { get; set; }
         public int? ADCId { get; set; }
         public int? SupportId { get; set; }
+        public bool HasActiveMatch { get { return CheckActiveMatch(); } set { } }
 
         [NotMapped]
         [JsonIgnore]
@@ -120,6 +121,11 @@ namespace Backend.Models
             }
             Rating += Chemistry;
             return Rating * 100 / 600;
+        }
+
+        private bool CheckActiveMatch()
+        {
+            return Matches.FirstOrDefault(x => x.IsDone == false) == null ? false : true;
         }
     }
 }

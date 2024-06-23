@@ -1,0 +1,126 @@
+﻿body {
+    background-image: url("https://images.contentstack.io/v3/assets/blt731acb42bb3d1659/blt40035c8f780802dd/649501f4604cb7dd5de6a304/ArenaEnd.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0;
+    height: 98vh;
+    font-family: 'Marcellus SC', serif;
+}
+
+.containerMain {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    height: 89vh;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto auto auto;
+    gap: 2px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        ". . ."
+        ". loginContainer ."
+        ". . .";
+}
+
+.line-break {
+    display: block; /* Ensure the line break behaves as expected */
+    margin-bottom: 10px; /* Adjust margin as needed */
+}
+
+.loginContainer {
+    background-image: url("https://i.postimg.cc/506Yyfc8/border2.png");
+    justify-content: center;
+    align-items: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 900px;
+    height: 800px;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 10% 10% 10% 10% 10% 25% 10% 10%;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "."
+        "titleArea"
+        "nameArea"
+        "pwdArea"
+        "warningArea"
+        "rmbArea"
+        "forgotArea"
+        "loginArea";
+    grid-area: loginContainer;
+}
+
+.warningArea {
+    grid-area: warningArea;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    display: grid;
+}
+
+.titleArea {
+    grid-area: titleArea;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font-size: 32px;
+    color: #cdbe91;
+}
+
+.nameArea {
+    grid-area: nameArea;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.pwdArea {
+    grid-area: pwdArea;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.rmbArea {
+    grid-area: rmbArea;
+    justify-content: center;
+    align-items: flex-start;
+    display: flex;
+    font-size: 24px;
+    color: #cdbe91;
+}
+
+.forgotArea {
+    grid-area: forgotArea;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.loginArea {
+    grid-area: loginArea;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.textInput {
+    background: #1e2328;
+    color: #cdbe91;
+    box-shadow: inset 0 0 2px #000000;
+    border-image: linear-gradient(to bottom, #c8aa6d, #7a5c29);
+    border-image-slice: 1;
+    border-width: 2px;
+    height: 40px;
+    width: 290px;
+}
+
+    .textInput:focus {
+        text-shadow: none;
+        box-shadow: none;
+        color: #cdbe9130;
+        box-shadow: 0 0 8px 0 #ffffff50;
+    }

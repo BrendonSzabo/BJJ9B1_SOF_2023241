@@ -15,8 +15,15 @@ namespace Backend.Models
         public RegionEnum Region { get; set; }
         public int WinnerCredits { get; set; }
         public int LoserCredits { get; set; }
+        /// <summary>
+        /// Id of the winning team.
+        /// </summary>
         public int? WinnerId { get; set; }
+        /// <summary>
+        /// Id of the losing team.
+        /// </summary>
         public int? LoserId { get; set; }
+        public bool IsDone { get; set; }
 
         public virtual ICollection<Team> Teams { get; set; }
 

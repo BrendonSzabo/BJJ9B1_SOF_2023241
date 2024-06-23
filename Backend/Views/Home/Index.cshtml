@@ -1,34 +1,29 @@
-﻿@model Tuple<List<Backend.Models.Player>, Backend.Models.User>
-
-    ViewData["Title"] = "Home Page";
-}
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <link href="https://fonts.googleapis.com/css?family=Marcellus+SC" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/index.css" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Legends of Fantasy</title>
 </head>
 <body>
-    <header>
-        @await Html.PartialAsync("_HeaderNavbar")
-    </header>
-    <div class="container">
-        <div>
-            <span class="main-text">Welcome to Legends of Fantasy</span>
-        </div>
-        <div class="subtext">
-            <span>A league of Legends team builder game</span>
-        </div>
-        <div class="buttons">
-            <form asp-area="Identity" asp-page="/Account/Login" method="post">
-                <input type="submit" value="Login" />
-            </form>
-            <form asp-area="Identity" asp-page="/Account/Register" method="post">
-                <input type="submit" value="Register" />
-            </form>
+    <div class="center">
+        <div class="container">
+            <div>
+                <span class="main-text">Welcome to Legends of Fantasy</span>
+            </div>
+            <div class="subtext">
+                <span>A league of Legends team builder game</span>
+            </div>
+            <div class="buttons">
+                <form asp-area="Identity" asp-page="/Account/Login" method="post">
+                    <input type="submit" value="Login" />
+                </form>
+                <form asp-area="Identity" asp-page="/Account/Register" method="post">
+                    <input type="submit" value="Register" />
+                </form>
+            </div>
         </div>
     </div>
 </body>
