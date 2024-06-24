@@ -14,9 +14,9 @@ namespace MatchFunction
             log.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");
             WebClient wc = new WebClient();
             // SetMatch
-            var SetMatchResult = wc.DownloadString("https://legendsoffantasy.azurewebsites.net/Home/Dashboard");
+            //var SetMatchResult = wc.DownloadString("https://legendsoffantasy.azurewebsites.net/Home/Dashboard");
             var SetMatchesResult = wc.DownloadString("https://legendsoffantasy.azurewebsites.net/Home/Dashboard/SetMatches");
-            var PlayMatchesResult = wc.DownloadString("https://legendsoffantasy.azurewebsites.net/Home/Dashboard/PlayMatches");
+            //var PlayMatchesResult = wc.DownloadString("https://legendsoffantasy.azurewebsites.net/Home/Dashboard/PlayMatches");
         }
     }
 }
