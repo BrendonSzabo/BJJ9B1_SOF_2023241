@@ -6,6 +6,14 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using System.Diagnostics;
+using Azure.Storage.Blobs;
+using static System.Net.WebRequestMethods;
+using Newtonsoft.Json;
+using System.Drawing.Drawing2D;
+using Microsoft.AspNet.SignalR.Json;
+using System.Text;
+using Azure.Storage.Blobs.Models;
+using System.Numerics;
 
 namespace Backend.Controllers
 {
@@ -17,7 +25,10 @@ namespace Backend.Controllers
         private readonly ApplicationDbContext _context;
         private readonly HomeLogic _homeLogic;
         private readonly ModelLogic<User> _userLogic;
-
+        BlobServiceClient blobServiceClient;
+        BlobContainerClient blobContainerClient;
+        string blobcstr = "DefaultEndpointsProtocol=https;AccountName=lofblob;AccountKey=5lRciqV+JL7ctiVfOzKZ2Bci5BokMpRZR4sNLr2SOxI+Gt+B7vCqcEfcx5gYw9qJoc7kYf2y1kY3+AStptviMw==;EndpointSuffix=core.windows.net";
+        string blobcstr2 = "DefaultEndpointsProtocol=https;AccountName=lofblob;AccountKey=1U2oZ5m87FDf4BngtR4qb+H6oQJx2rC8pIKx4bDAu6SteuazwQ9GrzDW0VjcKqilH8U6SHhWIeLc+AStXOBPYA==;EndpointSuffix=core.windows.net";
         public HomeController(ILogger<HomeController> logger, ApplicationDbContext context, UserManager<User> userManager, IEmailSender emailSender, HomeLogic homeLogic)
         {
             _emailSender = emailSender;
@@ -25,10 +36,12 @@ namespace Backend.Controllers
             _context = context;
             _userManager = userManager;
             _homeLogic = homeLogic;
+            blobServiceClient = new BlobServiceClient(blobcstr2);
+            blobContainerClient = blobServiceClient.GetBlobContainerClient("blobs");
         }
 
         [HttpPost]
-        public IActionResult MatchDetails(int id)
+        public async Task<IActionResult> MatchDetails(int id)
         {
             var match = _context.Matches.FirstOrDefault(m => m.Id == id);
             if (match == null)
@@ -37,18 +50,94 @@ namespace Backend.Controllers
             }
 
             return View(match);
+
+
+            //BLOBOS VÁLTOZAT!
+
+            //BlobClient blobClient = blobContainerClient.GetBlobClient($"match_{id}");
+            //if (await blobClient.ExistsAsync())
+            //{
+            //    var downloadInfo = await blobClient.DownloadAsync();
+            //    using (var streamReader = new StreamReader(downloadInfo.Value.Content))
+            //    {
+            //        var matchData = await streamReader.ReadToEndAsync();
+            //        //var match = JsonSerializer.Deserialize<Match>(matchData);
+            //        var match = System.Text.Json.JsonSerializer.Deserialize<Match>(matchData);
+
+            //        return View(match);
+            //    }
+            //}
+            //return Error("Match not found in blob storage.");
         }
 
         [HttpPost]
-        public IActionResult PlayerDetails(int id)
+        public async Task<IActionResult> PlayerDetails(int id, [FromForm] IFormFile blobUpload)
         {
             var player = _context.Players.FirstOrDefault(m => m.Id == id);
             if (player == null)
             {
                 return Error("Player not found in database.");
             }
+            //BlobClient blobClient = blobContainerClient.GetBlobClient($"player_{id}");
+            //using (var streamReader = blobUpload.OpenReadStream())
+            //{
+            //    //new StreamReader(downloadInfo.Value.Content)
+            //    //var playerData = await streamReader.ReadToEndAsync();
+            //    //var player = System.Text.Json.JsonSerializer.Deserialize<Player>(playerData);
+            //    await blobClient.UploadAsync(streamReader, true);
+
+            //}
+            //blobClient.SetAccessTier(AccessTier.Cool);
+
+            //_context.Players.Add(player);
+            //_context.SaveChanges();
 
             return View(player);
+
+
+            //BLOBOS VÁLTOZAT!
+
+            //var blobClient = blobContainerClient.GetBlobClient($"player_{id}");
+            ////if (!await blobClient.ExistsAsync())
+            ////{
+            //    //var downloadInfo = await blobClient.DownloadAsync();
+            //    using (var streamReader = blobUpload.OpenReadStream() )
+            //    {
+            //        //new StreamReader(downloadInfo.Value.Content)
+            //        //var playerData = await streamReader.ReadToEndAsync();
+            //        //var player = System.Text.Json.JsonSerializer.Deserialize<Player>(playerData);
+            //        await blobClient.UploadAsync(streamReader, true);
+
+            //    }
+            //    blobClient.SetAccessTier(AccessTier.Cool);
+
+            ////}
+            //    var p = _context.Players.FirstOrDefault(p => p.Id == id);
+
+            //    _context.Players.Add(p);
+            //    _context.SaveChanges();
+
+            //    return View(p);
+
+            //else
+            //{
+            //    // Ha nem létezik, akkor létrehozzuk
+            //    //var player = _context.Players.FirstOrDefault(p => p.Id == id);
+            //    //if (player != null)
+            //    //{
+            //    //    var playerJson = JsonSerializer.Serialize(player);
+            //    //    using (var memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(playerJson)))
+            //    //    {
+            //    //        await blobClient.UploadAsync(memoryStream, true);
+            //    //    }
+            //    //    return View(player);
+            //    //}
+            //    //else
+            //    //{
+            //    //    return Error("Player not found in database.");
+            //    //}
+            //}
+            //return Error("Player not found in blob storage.");
         }
 
         //public async Task<IActionResult> Index()
