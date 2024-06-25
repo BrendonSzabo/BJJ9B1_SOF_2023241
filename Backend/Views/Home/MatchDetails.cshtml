@@ -36,18 +36,20 @@
         <div class="column">
             @foreach (Player player in winningTeam.Players)
             {
-                <form id="playerForm-@player.Id" class="player-card" draggable="true" ondragstart="onDragStart(event)" asp-action="PlayerDetails" asp-controller="Home" method="post">
+                <form enctype="multipart/form-data" id="playerForm-@player.Id" class="player-card" draggable="true" ondragstart="onDragStart(event)" asp-action="PlayerDetails" asp-controller="Home" method="post">
                     @Html.Raw(Helpers.CreatePlayerCard(player, false))
                     <input type="hidden" id="playerId-@player.Id" name="id" value="@player.Id" />
+                    <input type="file"  name="blobupload" />
                 </form>
             }
         </div>
         <div class="column">
             @foreach (Player player in losingTeam.Players)
             {
-                <form id="playerForm-@player.Id" class="player-card" draggable="true" ondragstart="onDragStart(event)" asp-action="PlayerDetails" asp-controller="Home" method="post">
+                <form enctype="multipart/form-data" id="playerForm-@player.Id" class="player-card" draggable="true" ondragstart="onDragStart(event)" asp-action="PlayerDetails" asp-controller="Home" method="post">
                     @Html.Raw(Helpers.CreatePlayerCard(player, false))
                     <input type="hidden" id="playerId-@player.Id" name="id" value="@player.Id" />
+                    <input type="file" name="blobupload" />
                 </form>
             }
         </div>
