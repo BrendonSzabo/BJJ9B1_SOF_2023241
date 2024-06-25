@@ -27,6 +27,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="~/css/dash.css"/>
+    <link rel="stylesheet" href="~/css/playerCard.css"/>
+    <link rel="stylesheet" href="~/css/matchCard.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.7/signalr.min.js"></script>
     <script type="text/javascript" src="~/js/dash.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Marcellus+SC" rel="stylesheet">
 </head>
@@ -37,10 +40,10 @@
             {
                 @foreach (Player player in shopPlayers)
                 {
-                    <form id="playerForm-@player.Id" asp-action="PlayerDetails" asp-controller="Home" method="post">
-                        @Html.Raw(Helpers.CreatePlayerCard(player, true))
-                        <input type="hidden" id="matchId-@player.Id" name="id" value="@player.Id" />
+                    <form asp-action="PlayerDetails" asp-controller="Home" method="post" class="playerForm">
+                        <input type="hidden" name="id" value="@player.Id" />
                     </form>
+                        <button class="playerButton" style="border: none; margin: 0px; padding: 0px">@Html.Raw(Helpers.CreatePlayerCard(player, true))</button>
                 }
             }
             else
@@ -84,9 +87,9 @@
             {
                 @foreach (Player player in team.Players)
                 {
-                    <form id="playerForm-@player.Id" class="player-card" draggable="true" ondragstart="onDragStart(event)" asp-action="PlayerDetails" asp-controller="Home" method="post">
-                        @Html.Raw(Helpers.CreatePlayerCard(player, false))
-                        <input type="hidden" id="playerId-@player.Id" name="id" value="@player.Id" />
+                    <form asp-action="PlayerDetails" asp-controller="Home" method="post">
+                        <input type="hidden" name="id" value="@player.Id" />
+                        <button style="border: none; margin: 0px; padding: 0px">@Html.Raw(Helpers.CreatePlayerCard(player, false))</button>
                     </form>
                 }
             }
@@ -150,9 +153,9 @@
                 {
                     @foreach (Match match in team.Matches)
                     {
-                        <form id="matchForm-@match.Id" asp-action="MatchDetails" asp-controller="Home" method="post">
-                            @Html.Raw(Helpers.CreateMatchCard(match))
-                            <input type="hidden" id="matchId-@match.Id" name="id" value="@match.Id" />
+                        <form asp-action="MatchDetails" asp-controller="Home" method="post">
+                            <button style="border: none; margin: 0px; padding: 0px">@Html.Raw(Helpers.CreateMatchCard(match))</button>
+                            <input type="hidden" name="id" value="@match.Id" />
                         </form>
                     }
                 }
@@ -190,5 +193,26 @@
             </div>
         </div>
     </div>
+    <div id="chatPopup" class="chat-popup">
+        <div class="chat-header">
+            <span class="chat-title">Chat</span>
+            <button class="close-chat" onclick="closeChat()">×</button>
+        </div>
+        <div id="messagesList" class="chat-messages"></div>
+        <form id="chatForm" class="chat-form">
+            <input type="hidden" id="userInput" value="@user.UserName" disabled />
+            <input type="text" id="destinationInput" placeholder="Whisper" required style="width: 20%;" />
+            <input type="text" id="messageInput" placeholder="Message" required style="width: 60%;" />
+            <button type="submit" style="width: 24px; height: 24px; padding: 0px; margin: 0px;"><img src="https://icon-library.com/images/send-message-icon/send-message-icon-25.jpg" style="width: 24px; height: 24px" alt="Send" /></button>
+        </form>
+    </div>
+    <button id="chatButton" class="open-chat" onclick="openChat()">Chat</button>
+    @{
+        if (User.IsInRole("Admin"))
+        {
+            var url = Context.Request.PathBase + "/Admin";
+            <a href="@url" style="font-size: 36px;">Admin</a>
+        }
+    }
 </body>
 </html>

@@ -79,7 +79,7 @@ namespace Backend.Controllers
             List<Player> shopPlayers = new List<Player>();
             foreach (var player in _context.Players)
             {
-                if (user.Team.Players.FirstOrDefault(x => x.Id == player.Id) == null)
+                if (user.Team.Players.FirstOrDefault(x => x.Name == player.Name) == null)
                 {
                     shopPlayers.Add(player);
                 }

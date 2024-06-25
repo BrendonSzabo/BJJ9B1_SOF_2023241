@@ -1,0 +1,31 @@
+﻿<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="~/js/admin.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+    <h1 class="w3-animate-zoom">For the effects</h1>
+    <h2 class="w3-spin" style="width: 10px;">Whoa</h2>
+    <h3 class="w3-animate-fading">This is epic</h3>
+    <button onclick="unfinishedMatches()">ListUnfinishedMatches</button>
+    <button onclick="finishedMatches()">ListFinishedMatches</button>
+    <button onclick="playersByRating()">ListPlayerByRating</button>
+    <button onclick="usersByRating()">ListUserByRating</button>
+    <button onclick="teamsByRating()">ListTeamByRating</button>
+    <button onclick="getUsers()">GetUsers</button>
+    <button onclick="seedData()">Seed data</button>
+    <button onclick="listPlayers()">List players</button>
+
+    <input type="number" id="lower" placeholder="lower"/>
+    <input type="number" id="higher" placeholder="higher" />
+    <input type="text" id="username" placeholder="username" />
+    <input id="url" type="hidden" value="@Context.Request.Path;"/>
+    <div id="results"></div>
+</body>
+</html>
+
+
+
+

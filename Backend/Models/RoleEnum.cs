@@ -2,6 +2,7 @@
 {
     public enum RoleEnum
     {
+        None = 0,
         Top = 1,
         Jungle = 2,
         Mid = 3,

@@ -1,6 +1,6 @@
 ﻿body {
     font-family: 'Marcellus SC', serif;
-    background-image: url('https://admin.esports.gg/wp-content/uploads/2024/01/Riot-Games-Arena-Stage-1-968x544.jpg');
+    background-image: url('https://preview.redd.it/lfd0mem548e61.jpg?width=640&crop=smart&auto=webp&s=52a2cfbb758c1f217287e8c25e6e82c89a4cd615');
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -66,17 +66,18 @@
     justify-content: center;
     align-items: center;
     float: left;
-    width: 20%; /* Each column takes up one-third of the container */
+    width: 68px; /* Each column takes up one-third of the container */
     height: 68px;
     padding: 10px;
     box-sizing: border-box; /* Ensures padding doesn't affect width */
     border: 1px solid #ccc;
     margin: 0px;
+    background-size: cover;
 }
 
     .playerImgCol img {
-        max-width: 100%;
-        max-height: 100%;
+        max-width: 48px;
+        max-height: 48px;
         margin: 0px;
     }
 
@@ -85,7 +86,7 @@
     justify-content: center;
     align-items: center;
     float: left;
-    width: 60%; /* Each column takes up one-third of the container */
+    width: 67%; /* Each column takes up one-third of the container */
     height: 68px;
     padding: 10px;
     box-sizing: border-box; /* Ensures padding doesn't affect width */
@@ -96,15 +97,16 @@
 
 .playerPrice{
     color: pink;
-    font-size: 69px;
+    font-size: 24px;
 }
 
 .containerDash {
-    height: 80vh;
-    
+    border: solid;
+    height: 100%;
+    width: 100%;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr;
+    grid-template-columns: 33% 34% 33%;
+    grid-template-rows: 100%;
     gap: 0px 0px;
     grid-auto-flow: row;
     grid-template-areas:
@@ -112,12 +114,14 @@
 }
 
 .playerStoreArea {
-    
+    height: 80vh;
+    overflow-y: auto;
     grid-area: playerStoreArea;
 }
 
 .ownPlayersArea {
-    
+    height: 80vh;
+    overflow-y: auto;
     grid-area: ownPlayersArea;
 }
 
@@ -135,7 +139,6 @@
 }
 
 .mapArea {
-    
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
@@ -147,6 +150,10 @@
         ". supArea adcArea";
     grid-area: mapArea;
     background-image: url('https://www.hotspawn.com/app/uploads/2020/03/summoners-rift.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
 }
 
 .midArea {
@@ -190,6 +197,88 @@
 }
 
 .matchesArea {
-    
+    height: 40vh;
+    overflow-y: scroll;
     grid-area: matchesArea;
+}
+
+
+/* Chat Popup Styles */
+.chat-popup {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    right: 15px;
+    border: 2px solid #c8aa6d;
+    z-index: 9;
+    width: 500px;
+    background-color: #73674B;
+}
+
+.chat-header {
+    padding: 10px;
+    background-color: #1e2328;
+    color: #cdbe91;
+    font-size: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat-title {
+    margin: 0;
+}
+
+.close-chat {
+    background: none;
+    border: none;
+    color: #cdbe91;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.chat-messages {
+    padding: 10px;
+    height: 200px;
+    overflow-y: auto;
+    border-top: 1px solid #f1f1f1;
+    border-bottom: 1px solid #f1f1f1;
+    background-color: #73674B;
+}
+
+.chat-form {
+    display: flex;
+    padding: 10px;
+}
+
+    .chat-form input[type="text"] {
+        flex: 1;
+        padding: 10px;
+        margin-right: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .chat-form button {
+        padding: 10px;
+        background-color: #007bff;
+        border: none;
+        color: white;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+
+.open-chat {
+    font-family: 'Marcellus SC', serif;
+    position: fixed;
+    bottom: 20px;
+    right: 15px;
+    border-image: linear-gradient(to bottom, #c8aa6d, #7a5c29);
+    border-image-slice: 1;
+    border-width: 2px;
+    box-shadow: inset 0 0 2px #000000;
+    color: #cdbe91;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-weight: bold;
 }

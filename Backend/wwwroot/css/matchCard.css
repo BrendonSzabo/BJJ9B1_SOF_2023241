@@ -1,0 +1,37 @@
+﻿.matchContainer {
+    display: grid;
+    grid-template-columns: 68px 150px 68px;
+    grid-template-rows: 68px;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "teamName1 matchResult teamName2";
+}
+
+.teamName1 {
+    grid-area: teamName1;
+    height: 68px;
+    width: 110px;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    font-size: 20px;
+}
+
+.teamName2 {
+    font-size: 20px;
+    grid-area: teamName2;
+    height: 68px;
+    width: 110px;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+}
+
+.matchResult {
+    font-size: 32px;
+    grid-area: matchResult;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+}

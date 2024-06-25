@@ -9,36 +9,36 @@ namespace Backend.WebHelpers
             if (isShop)
             {
                 return
-                $"<div class='playerCard' data-player-id='{player.Id}' ondblclick='submitPlayerForm(this)'>" +
-                    $"<div class='playerImgCol'>{player.Image}</div>" +
-                    "<div class='playerStatCol'>" +
-                        $"<div>{player.Name}, {player.Nationality}</div>" +
-                        $"<div>{player.Role} <p class='playerPrice'>{player.Price}</p></div>" +
-                    "</div>" +
-                    "<div class='playerImgCol'>100</div>" +
-                "</div>";
+                    $"<div class=\"playerContainer\">" +
+                      $"<div class=\"playerImg\"><img src=\"{@player.Image}\"/></div>"+
+                      $"<div class=\"playerStat\">"+
+                        $"<div class=\"playerNationality\">{player.Nationality}, {player.Role.ToString()}</div>"+
+                        $"<div class=\"playerName\">{player.Name}</div>" +
+                      $"</div>"+
+                      $"<div class=\"playerRating\">{player.Rating}</div>" +
+                      $"<div class=\"playerCost\">{player.Price}</div>" +
+                    $"</div>";
             }
             return
-                $"<div class='playerCard' data-player-id='{player.Id}' ondblclick='submitPlayerForm(this)'>" +
-                    $"<div class='playerImgCol'>{player.Image}</div>" +
-                    "<div class='playerStatCol'>" +
-                        $"<div>{player.Name}, {player.Nationality}</div>" +
-                        $"<div>{player.Role}</div>" +
-                    "</div>" +
-                    "<div class='playerImgCol'>100</div>" +
-                "</div>";
+                $"<div class=\"playerContainer\">" +
+                      $"<div class=\"playerImg\"><img src=\"{@player.Image}\"/></div>" +
+                      $"<div class=\"playerStat\">" +
+                        $"<div class=\"playerNationality\">{player.Nationality}, {player.Role.ToString()}</div>" +
+                        $"<div class=\"playerName\"><a asp-action=\"PlayerDetails\" asp-controller=\"Home\" asp-route-id=\"{player.Id}\">{player.Name}</a></div>" +
+                      $"</div>" +
+                      $"<div class=\"playerRating\">{player.Rating}</div>" +
+                      $"<div class=\"playerCost\"></div>" +
+                    $"</div>";
         }
 
         public static string CreateMatchCard(Match match)
         {
             return
-                $"< div class='matchCard' data-match-id='{match.Id}' ondblclick='submitMatchForm(this)'>" +
-                    $"<div class='teamName'>{match.Teams.First(x => x.Id == match.WinnerId).Name}</div>" +
-                    "<div class='matchScore'>" +
-                        $"<div>{Math.Max(match.Team1Score, match.Team2Score)} ----- {Math.Min(match.Team1Score, match.Team2Score)}</div>" +
-                    "</div>" +
-                    $"<div class='teamName'>{match.Teams.First(x => x.Id == match.LoserId).Name}</div>" +
-                "</div>";
+                $"<div class=\"matchContainer\">"+
+                  $"<div class=\"teamName1\">{match.Teams.First(x => x.Id == match.WinnerId).Name}</div>"+
+                  $"<div class=\"matchResult\">{Math.Max(match.Team1Score, match.Team2Score)} ---- {Math.Min(match.Team1Score, match.Team2Score)}</div>"+
+                  $"<div class=\"teamName2\">{match.Teams.First(x => x.Id == match.LoserId).Name}</div>"+
+                $"</div>";
         }
     }
 }

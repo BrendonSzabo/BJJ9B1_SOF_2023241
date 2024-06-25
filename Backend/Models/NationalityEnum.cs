@@ -40,5 +40,6 @@
         HR,
         RU,
         LT,
+        Unknown
     }
 }

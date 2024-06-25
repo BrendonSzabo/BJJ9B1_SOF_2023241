@@ -7,6 +7,7 @@ using Backend.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,6 +46,17 @@ builder.Services.AddAuthentication()
     }
     );
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+});
+
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 
 builder.Services.AddScoped<HomeController>();
@@ -55,11 +67,24 @@ builder.Services.AddScoped<ModelController<Player>>();
 builder.Services.AddScoped<ModelLogic<Player>>();
 builder.Services.AddScoped<ModelController<Team>>();
 builder.Services.AddScoped<ModelLogic<Team>>();
+builder.Services.AddScoped<ModelController<User>>();
+builder.Services.AddScoped<ModelLogic<User>>();
 builder.Services.AddScoped<ApiController>();
 
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddSignalR();
+
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Your API Title", Version = "v1" });
+
+    // Optionally, configure Swagger to use XML comments from your project
+    // var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    // var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    // c.IncludeXmlComments(xmlPath, includeControllerXmlComments: true);
+});
+
 
 var app = builder.Build();
 
@@ -74,6 +99,8 @@ else
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+app.UseCors("AllowAll");
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
@@ -95,5 +122,14 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
+
+app.UseSwagger();
+
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Your API V1");
+    // Optionally, serve Swagger UI at the root URL (http://localhost:<port>/) with the endpoint
+    // c.RoutePrefix = string.Empty;
+});
 
 app.Run();
