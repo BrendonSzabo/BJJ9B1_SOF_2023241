@@ -22,6 +22,44 @@
         ". . .";
 }
 
+/*.LoginGridContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:*/
+        /*". Important ."
+        ". Important ."
+        ". Additional .";*/
+        /*". Important ."
+        ". Additional ."*/
+        /*". . .";*/
+/*}*/
+
+.LoginGridContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 0.2fr;
+    gap: 0px 0px;
+    grid-template-areas:
+        ". Important ."
+        ". Additional .";
+}
+
+
+.Important {
+    grid-area: Important;
+    /*background-color:blue;*/
+    margin-bottom:-10px;
+}
+
+.Additional {
+    grid-area: Additional;
+    margin-left: 342px;
+    /*background-color:red;*/
+}
+
 .line-break {
     display: block; /* Ensure the line break behaves as expected */
     margin-bottom: 10px; /* Adjust margin as needed */
