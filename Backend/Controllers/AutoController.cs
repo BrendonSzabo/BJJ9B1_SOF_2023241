@@ -32,7 +32,6 @@ namespace Backend.Controllers
                 {
                     return BadRequest(result.e);
                 }
-                // Schedule match
                 return Ok();
             }
             return BadRequest("No opponent found.");
@@ -52,7 +51,6 @@ namespace Backend.Controllers
                     {
                         return BadRequest(result.e);
                     }
-                    // Schedule match
                 }
             }
             return Ok();
@@ -90,13 +88,28 @@ namespace Backend.Controllers
                                 else
                                 {
                                     var differental = winner.Rating - loser.Rating;
-                                    match.WinnerCredits = 700 - (differental * 100);
-                                    match.LoserCredits = 1000 + (differental * 100);
+                                    match.WinnerCredits = 1000 + (differental * 100);
+                                    match.LoserCredits = 700 - (differental * 100);
                                 }
                             }
                             else
                             {
-                                match.WinnerId = match.Teams.Last().Id;
+                                var winner = match.Teams.Last();
+                                var loser = match.Teams.First();
+                                match.WinnerId = winner.Id;
+                                match.LoserId = loser.Id;
+                                if (winner.Rating >= loser.Rating)
+                                {
+                                    var differental = loser.Rating - winner.Rating;
+                                    match.WinnerCredits = 1000;
+                                    match.LoserCredits = 800 - (500 - (differental * 100));
+                                }
+                                else
+                                {
+                                    var differental = winner.Rating - loser.Rating;
+                                    match.WinnerCredits = 1000 + (differental * 100);
+                                    match.LoserCredits = 700 - (differental * 100);
+                                }
                             }
                             match.Date = $"{date.Year}/{date.Month}/{date.Day}";
                             match.IsDone = true;

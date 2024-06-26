@@ -46,7 +46,7 @@ namespace Backend.Controllers
             var match = _context.Matches.FirstOrDefault(m => m.Id == id);
             if (match == null)
             {
-                return Error("Match not found in database.");
+                return ErrorWithMessage("Match not found in database.");
             }
 
             return View(match);
@@ -76,7 +76,7 @@ namespace Backend.Controllers
             var player = _context.Players.FirstOrDefault(m => m.Id == id);
             if (player == null)
             {
-                return Error("Player not found in database.");
+                return ErrorWithMessage("Player not found in database.");
             }
             //BlobClient blobClient = blobContainerClient.GetBlobClient($"player_{id}");
             //using (var streamReader = blobUpload.OpenReadStream())
@@ -298,7 +298,7 @@ namespace Backend.Controllers
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error(string errorMessage)
+        public IActionResult ErrorWithMessage(string errorMessage)
         {
             ViewBag.ErrorMessage = errorMessage;
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

@@ -1,4 +1,8 @@
-﻿<html lang="en">
+﻿@{
+    var user = ViewBag.User as string;
+    Console.WriteLine(user);
+}
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,6 +27,12 @@
     <input type="text" id="username" placeholder="username" />
     <input id="url" type="hidden" value="@Context.Request.Path;"/>
     <div id="results"></div>
+
+    <form asp-action="AddMatch" asp-area="Admin" method="post">
+        <input type="hidden" name="userId" id="userId" value="@user"></input>
+        <button>Add money</button>
+    </form>
+
 </body>
 </html>
 

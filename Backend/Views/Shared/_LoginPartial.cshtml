@@ -6,12 +6,25 @@
     bool hideNavbar = currentPage == "/";
     bool isLogin = currentPage == "/Identity/Account/Login";
     bool isRegister = currentPage == "/Identity/Account/Register";
+    var user = SignInManager.UserManager.GetUserAsync(User).Result;
 }
 <ul class="navbar-nav">
     @if (!hideNavbar && !isLogin & !isRegister)
     {
         @if (SignInManager.IsSignedIn(User))
         {
+            <li class="nav-item" style="display: grid; justify-content: center; align-items: center;">
+                <span id="scheduled"></span>
+            </li>
+            <li class="nav-item" style="display: grid; justify-content: center; align-items: center;">
+                <span>Credits: @user.Credits</span>
+            </li>
+            @if (user.Team.ADCId is not null && user.Team.TopId is not null && user.Team.MidId is not null && user.Team.JungleId is not null && user.Team.SupportId is not null)
+            {
+                <li class="nav-item">
+                    <button class="link" onclick="setMatch(@user);">Play</button>
+                </li>
+            }
             <li class="nav-item">
                 <button class="link"><a asp-controller="Home" asp-action="Dashboard">Home</a></button>
             </li>

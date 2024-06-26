@@ -6,20 +6,21 @@
     if (SignInManager.IsSignedIn(User) is false)
     {
         var loginUrl = Url.Page("/Account/Login", new { area = "Identity" });
-        <script>
-            window.location.href = '@loginUrl';
-        </script>
+                <script>
+                    window.location.href = '@loginUrl';
+                </script>
     }
     @if (ViewBag.User is null || ViewBag.Team is null || ViewBag.ShopPlayers is null)
     {
         var errorUrl = Url.Action("Error", "Home");
-        <script>
-            window.location.href = '@errorUrl';
-        </script>
+                <script>
+                    window.location.href = '@errorUrl';
+                </script>
     }
     var user = ViewBag.User as User;
     var team = ViewBag.Team as Team;
     var shopPlayers = ViewBag.ShopPlayers as List<Player>;
+    Player selectedPlayer = null;
 }
 
 <html lang="en">
@@ -40,10 +41,10 @@
             {
                 @foreach (Player player in shopPlayers)
                 {
-                    <form asp-action="PlayerDetails" asp-controller="Home" method="post" class="playerForm">
+                    <form asp-action="PlayerDetails" asp-controller="Home" method="post" id="playerForm-@player.Id">
                         <input type="hidden" name="id" value="@player.Id" />
                     </form>
-                        <button class="playerButton" style="border: none; margin: 0px; padding: 0px">@Html.Raw(Helpers.CreatePlayerCard(player, true))</button>
+                        <button onclick="selectPlayer(@player.Id)" ondblclick="getPlayerDetails(@player.Id);" style="border: none; margin: 0px; padding: 0px">@Html.Raw(Helpers.CreatePlayerCard(player, true))</button>
                 }
             }
             else
@@ -89,8 +90,8 @@
                 {
                     <form asp-action="PlayerDetails" asp-controller="Home" method="post">
                         <input type="hidden" name="id" value="@player.Id" />
-                        <button style="border: none; margin: 0px; padding: 0px">@Html.Raw(Helpers.CreatePlayerCard(player, false))</button>
                     </form>
+                    <button ondblclick="getPlayerDetails(@player.Id);" style="border: none; margin: 0px; padding: 0px">@Html.Raw(Helpers.CreatePlayerCard(player, false))</button>
                 }
             }
             else
@@ -211,8 +212,41 @@
         if (User.IsInRole("Admin"))
         {
             var url = Context.Request.PathBase + "/Admin";
-            <a href="@url" style="font-size: 36px;">Admin</a>
+                    <a href="@url" style="font-size: 36px;">Admin</a>
         }
     }
+    <form id="buyForm" asp-action="Buy" asp-controller="Core" method="post" hidden>
+        <input id="buyUserId" type="hidden" name="userId" value="@user.Id" />
+        <input id="buyPlayerId" type="hidden" name="playerId" value="" />
+        <button>Buy player</button>
+    </form>
+
+    <script>
+        const shopPlayers = @Html.Raw(Json.Serialize(shopPlayers));
+        const user = @Html.Raw(Json.Serialize(user));
+        function getPlayerDetails(playerId) {
+            const form = document.getElementById('playerForm-' + playerId);
+            if (form) {
+                console.log('playerForm-' + playerId);
+                form.submit();
+                console.log('submitting form playerForm-' + playerId);
+            } else {
+                console.error('Form not found: playerForm-' + playerId);
+            }
+        }
+
+        function selectPlayer(playerId) {
+            console.log('selectPlayer', playerId);
+            const selectedPlayer = shopPlayers.find(player => player.Id === playerId);
+            if (true) {
+                document.getElementById('buyForm').hidden = false;
+                document.getElementById('buyPlayerId').value = playerId;
+                document.getElementById('buyUserId').value = "@user.Id";
+            }
+        }
+
+        window.selectPlayer = selectPlayer;
+        window.getPlayerDetails = getPlayerDetails;
+    </script>
 </body>
 </html>

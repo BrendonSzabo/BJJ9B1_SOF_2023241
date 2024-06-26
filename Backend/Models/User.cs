@@ -51,6 +51,13 @@ namespace Backend.Models
                         credits += match.LoserCredits;
                     }
                 }
+                if (Team.Players is not null && Team.Players.Count() != 0)
+                {
+                    foreach (var player in Team.Players)
+                    {
+                        credits -= player.Price;
+                    }
+                }
             }
             return credits;
         }

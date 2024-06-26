@@ -118,7 +118,7 @@ namespace Backend.Models
         private int CalculateRating()
         {
             Rating = 0;
-            if (Players is not null && Players.Count() is not 0)
+            if (Players is not null && Players.Count() != 0)
             {
                 foreach (Player player in Players)
                 {
