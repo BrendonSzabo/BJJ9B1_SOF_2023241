@@ -111,6 +111,32 @@
                 <button id="registerSubmit" type="submit" class="link" style="width: 130px;">Register</button>
             </div>
         </form>
+        
+            <div class="Social">
+                @{
+                    if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                    {
+
+                    }
+                    else
+                    {
+                        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                            @foreach (var provider in Model.ExternalLogins!)
+                            {
+                                if (@provider.DisplayName is "Facebook")
+                                {
+                                    <button type="submit" class="link" style="width: 100px; margin-right: 4px;" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">Fb</button>
+                                }
+                                else
+                                {
+                                    <button type="submit" class="link" style="width: 100px;" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">Msc</button>
+                                }
+                            }
+                        </form>
+                    }
+                }
+            </div>
+       
     </div>
 </body>
 

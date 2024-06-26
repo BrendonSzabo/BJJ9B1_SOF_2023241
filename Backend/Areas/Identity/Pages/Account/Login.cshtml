@@ -98,33 +98,39 @@
 </head>
 
 <body>
-    <div class="containerMain">
-        <form method="post" class="loginContainer">
-            <div class="titleArea">
-                Log In
-            </div>
-            <div class="nameArea">
-                <input asp-for="Input.Email" class="textInput" autocomplete="username" aria-required="true" placeholder="Email" />
-            </div>
-            <div class="pwdArea">
-                <input asp-for="Input.Password" class="textInput" autocomplete="current-password" aria-required="true" placeholder="Password" />
-            </div>
-            <div class="warningArea">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
-            </div>
-            <div class="rmbArea">
-                <label asp-for="Input.RememberMe">
-                    <input type="checkbox" asp-for="Input.RememberMe" />
-                    @Html.DisplayNameFor(m => m.Input.RememberMe)
-                </label>
-            </div>
-            <div class="forgotArea">
-                <button class="link" style="width: 300px;"><a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a></button>
-            </div>
-            <div class="loginArea">
-                <button id="login-submit" type="submit" class="link" style="width: 100px; margin-right: 9px;">Log in</button>
+    <div class="LoginGridContainer">
+        <div class="Important">
+        @* class="containerMain" *@
+            <form method="post" class="loginContainer">
+                <div class="titleArea">
+                    Log In
+                </div>
+                <div class="nameArea">
+                    <input asp-for="Input.Email" class="textInput" autocomplete="username" aria-required="true" placeholder="Email" />
+                </div>
+                <div class="pwdArea">
+                    <input asp-for="Input.Password" class="textInput" autocomplete="current-password" aria-required="true" placeholder="Password" />
+                </div>
+                <div class="warningArea">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+                <div class="rmbArea">
+                    <label asp-for="Input.RememberMe">
+                        <input type="checkbox" asp-for="Input.RememberMe" />
+                        @Html.DisplayNameFor(m => m.Input.RememberMe)
+                    </label>
+                </div>
+                <div class="forgotArea">
+                    <button class="link" style="width: 300px;"><a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a></button>
+                </div>
+                <div class="loginArea">
+                    <button id="login-submit" type="submit" class="link" style="width: 100px; margin-right: 9px;">Log in</button>
+                </div>
+            </form>
+        </div>
+        <div class="Additional">
                 @{
                     if ((Model.ExternalLogins?.Count ?? 0) == 0)
                     {
@@ -147,9 +153,10 @@
                         </form>
                     }
                 }
-            </div>
-        </form>
+        </div>
     </div>
+        @* </form> *@
+    @* </div> *@
 </body>
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

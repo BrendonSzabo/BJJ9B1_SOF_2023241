@@ -17,9 +17,10 @@
     gap: 2px 0px;
     grid-auto-flow: row;
     grid-template-areas:
-        ". . ."
         ". loginContainer ."
-        ". . .";
+        /*". Local ."*/
+        ". Social ."
+        /*". . .";*/
 }
 
 .line-break {
@@ -50,8 +51,23 @@
         "pwd2Area"
         "warningArea"
         "loginArea";
+    /*grid-area: Local;*/
     grid-area: loginContainer;
+    /*background-color:red;*/
+    margin-bottom:-30px;
 }
+
+.Local {
+    grid-area: local;
+    margin-left: 342px;
+}
+
+.Social {
+    grid-area: Social;
+    margin-left: 342px;
+    /*background-color:blue;*/
+}
+
 
 .warningArea {
     grid-area: warningArea;
